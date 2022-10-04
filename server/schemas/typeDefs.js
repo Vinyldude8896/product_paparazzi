@@ -10,12 +10,24 @@ const typeDefs = gql`
     PhotoCount: Int
     Photos: [Photo]
   }
+  type Auth {
+    token: ID!
+    user: User
+  }
+  type Query {
+    me: User
+    users: [User]
+    user(username: String!): User
+    photos(username: String): [Photo]
+    photo(_id: ID!): Photo
+  }
+  
 
   type Photo {
     _id: ID
-    Location: String
-    Product: String
-    Image: String
+    location: String
+    product: String
+    image: String
     createdAt: String
   }
   type Query {
@@ -26,8 +38,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login(email: String!, password: String!): User
-    addUser(username: String!, email: String!, password: String!): User
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    addPhoto(location: String!, product: String!, image: String!, createdAt: String!): Photo
   }
 `;
 
