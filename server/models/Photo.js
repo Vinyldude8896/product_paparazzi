@@ -1,55 +1,41 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
-const { Schema } = mongoose;
-const bcrypt = require('bcrypt');
-const Order = require('./Order');
-
-const photoSchema = new Schema({
-  location: {
-    type: String,
-    required: true,
-    trim: true
+const photoSchema = new Schema(
+  {
+    photoText: {
+      type: String,
+      required: 'You need to leave a Photo!',
+      minlength: 1,
+      maxlength: 280
+    },
+    location: {
+        type: String,
+        required: "You must include a location",
+        minlength: 1,
+        maxlength: 40
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: timestamp => dateFormat(timestamp)
+    },
+    username: {
+      type: String,
+      required: true
+    },
   },
-  product: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  image: {
-    type: String,
-    required: true,
-    minlength: 5
-  },
-  createdAt: {
-    type: Date,
-    required: true,
-    default: Date.now
-
-  },
-//   photos: [Photo.schema]
-});
-
-_id: ID
-location: String
-product: String
-image: String
-createdAt: String
-
-// set up pre-save middleware to create password
-userSchema.pre('save', async function(next) {
-  if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+  {
+    toJSON: {
+      getters: true
+    }
   }
+);
 
-  next();
+photoSchema.virtual('photoCount').get(function() {
+  return this.photos.length;
 });
 
-// compare the incoming password with the hashed password
-userSchema.methods.isCorrectPassword = async function(password) {
-  return await bcrypt.compare(password, this.password);
-};
+const Photo = model('photo', photoSchema);
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+module.exports = Photo;
