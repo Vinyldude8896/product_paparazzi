@@ -19,9 +19,9 @@
 }
 
 .myBackgroundImage {
-	width: 100%;
+	width: auto;
 	height: auto;
-	object-fit: cover;
+	object-fit: scale-down;
 }
 
 .Intro {
