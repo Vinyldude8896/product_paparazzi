@@ -16,9 +16,6 @@ const Header = () => {
 				<Link to="/">
 					<img className="logo" src={PaparazziLogo} alt="camera with logo" />
 				</Link>
-				<div class="bg-text">
-					<h2>Help Your Favourite Brand and Be Rewarded</h2>
-				</div>
 
 				<nav className="text-center">
 					{Auth.loggedIn() ? (
