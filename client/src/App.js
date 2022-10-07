@@ -14,7 +14,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
-import SingleThought from './pages/photoProduct';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 

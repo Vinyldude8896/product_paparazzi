@@ -14,16 +14,24 @@ const Header = () => {
 			<div className="container flex-row justify-space-between-lg justify-center align-center">
 				<Link to="/">
 					<h1>Product Paparazzi</h1>
+				</Link>
+    
 
-					<div class="bg-text">
+        {!Auth.loggedIn() ? (
+          <>
+        <div class="bg-text">
 						<h2>Help Your Favourite Brand and Be Rewarded</h2>
 					</div>
-				</Link>
+          </>
+        ) : (
+          <></>
+        )}
 
 				<nav className="text-center">
 					{Auth.loggedIn() ? (
 						<>
-							<Link to="/profile">Me</Link>
+            <Link to="/Incentives">My Incentives</Link>
+							<Link to="/profile">My Candids</Link>
 							<a href="/" onClick={logout}>
 								Logout
 							</a>
