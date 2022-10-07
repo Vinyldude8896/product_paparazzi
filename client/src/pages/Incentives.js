@@ -5,6 +5,9 @@ import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
+const couponCodes = ["023EryTHy678-0632"]
+
+
 const Profile = (props) => {
   const { username: userParam } = useParams();
   //   const {}
@@ -76,6 +79,9 @@ const Profile = (props) => {
           {/* This will use the variablesPhotos parameters */}
           <h5 className="card-title">You have currently uploaded 3 photos</h5>
           <p className="card-text">Your Incentive Tier is currently : Tier 1</p>
+          <p>_____________________________________________________</p>
+          <h5 className="card-title">Your previous redeemed coupon codes</h5>
+          <a href={couponCodes} className="text-blue card-text">{couponCodes}</a>
         </div>
       </div>
     </section>
