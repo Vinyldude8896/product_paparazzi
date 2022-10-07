@@ -17,7 +17,7 @@ const Home = () => {
 		<main>
 			<div className="col-12">
 				{!loggedIn && (
-					<div className=" myBackgroundImage">
+					<div className="myBackgroundImage">
 						<img src={BackgroundImage} alt="shopping cart in aisle" />
 					</div>
 				)}
