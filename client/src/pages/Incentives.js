@@ -79,7 +79,7 @@ const Profile = (props) => {
           {/* This will use the variablesPhotos parameters */}
           <h5 className="card-title">You have currently uploaded 3 photos</h5>
           <p className="card-text">Your Incentive Tier is currently : Tier 1</p>
-          <p>_____________________________________________________</p>
+          <p>______________________________________________</p>
           <h5 className="card-title">Your previous redeemed coupon codes</h5>
           <a href={couponCodes} className="text-blue card-text">{couponCodes}</a>
         </div>
