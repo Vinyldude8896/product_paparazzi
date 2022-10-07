@@ -19,8 +19,23 @@
 }
 
 .myBackgroundImage {
-	width: 800px;
+	width: 100%;
 	height: auto;
+	object-fit: cover;
+}
+
+.Intro {
+	text-align: center;
+	font-size: xx-large;
+	font-weight: 900;
+	text-shadow: 0 0 10px #e1f5f4;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.foot {
+	font-size: small;
+	text-align: end;
 }
 
 html,
@@ -36,12 +51,7 @@ body {
 	line-height: 1.5;
 	font-size: 20px;
 	color: var(--dark);
-	/* background-image: url(/client/src/images/shopcartaisle.jpeg);*/
 	background-color: #f3fffee1;
-}
-
-#footer {
-	font-size: small;
 }
 
 h2,
@@ -57,7 +67,13 @@ h6 {
 
 h1 {
 	font-family: "Dancing Script", cursive;
-	font-size: 2.25rem;
+	font-size: 3rem;
+	font-weight: bold;
+	margin-top: 0;
+	margin-left: 50px;
+	margin-bottom: 0;
+	color: #e1f5f4;
+	text-shadow: 0 0 10px #121a1a;
 }
 
 h2 {
@@ -102,7 +118,7 @@ nav {
 nav a {
 	font-family: "Raleway", sans-serif;
 	padding: 6px 10px;
-	/* margin: 0 15px; */
+	/* margin: 5 0; */
 	transition: all 0.2s;
 }
 
@@ -246,10 +262,12 @@ nav a:hover {
 
 /* LAYOUT */
 .container {
+	object-fit: cover;
 	width: 85%;
 	max-width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
+
+	/* margin-left: auto;
+	margin-right: auto; */
 }
 
 .container-fluid {
@@ -1263,4 +1281,40 @@ nav a:hover {
 	.align-center-xl {
 		align-items: center;
 	}
+}
+
+/* //////////////////TESTING////////////////////// */
+
+.bg-image {
+	/* The image used */
+	background-image: url("images/phoneCart.jpeg");
+
+	/* Add the blur effect */
+	filter: blur(8px);
+	-webkit-filter: blur(8px);
+
+	/* Full height */
+	height: 100%;
+
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+	color: white;
+	font-weight: bold;
+	border: 3px solid #f1f1f1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	width: 80%;
+	padding: 20px;
+	text-align: center;
 }
