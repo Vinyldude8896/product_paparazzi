@@ -17,17 +17,22 @@ const Home = () => {
 		<main>
 			<div className="col-12">
 				{!loggedIn && (
-					<div className=" myBackgroundImage">
-						<img src={BackgroundImage} alt="shopping cart in aisle" />
+					<div>
+						<img
+							className="myBackgroundImage"
+							src={BackgroundImage}
+							alt="shopping cart in aisle"
+						/>
 					</div>
 				)}
 
 				{loggedIn && (
-					<div className="col-12 mb-3">
+					<div>
 						{/* <ThoughtForm /> */}
 						<h1>Let's upload some photos!</h1>
 					</div>
 				)}
+<<<<<<< HEAD
 				<div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
         {!Auth.loggedIn() ? (
           <>
@@ -42,6 +47,8 @@ const Home = () => {
 				{loggedIn && userData ? (
 					<div className="col-12 col-lg-3 mb-3"></div>
 				) : null}
+=======
+>>>>>>> feature/html
 			</div>
 		</main>
 	);
