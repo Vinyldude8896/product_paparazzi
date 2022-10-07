@@ -15,17 +15,6 @@ const Header = () => {
 				<Link to="/">
 					<h1>Product Paparazzi</h1>
 				</Link>
-    
-
-        {!Auth.loggedIn() ? (
-          <>
-        <div class="bg-text">
-						<h2>Help Your Favourite Brand and Be Rewarded</h2>
-					</div>
-          </>
-        ) : (
-          <></>
-        )}
 
 				<nav className="text-center">
 					{Auth.loggedIn() ? (

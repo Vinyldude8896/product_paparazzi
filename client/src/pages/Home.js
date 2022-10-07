@@ -29,14 +29,15 @@ const Home = () => {
 					</div>
 				)}
 				<div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
-					{/* {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <ThoughtList
-              thoughts={thoughts}
-              title="Some Feed for Thought(s)..."
-            />
-          )} */}
+        {!Auth.loggedIn() ? (
+          <>
+        <div class="bg-text">
+						<h2>Help Your Favourite Brand and Be Rewarded</h2>
+					</div>
+          </>
+        ) : (
+          <></>
+        )}
 				</div>
 				{loggedIn && userData ? (
 					<div className="col-12 col-lg-3 mb-3"></div>
