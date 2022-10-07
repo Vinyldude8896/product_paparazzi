@@ -17,31 +17,27 @@ const Home = () => {
 		<main>
 			<div className="col-12">
 				{!loggedIn && (
-					<div>
-						<img
-							className="myBackgroundImage"
-							src={BackgroundImage}
-							alt="shopping cart in aisle"
-						/>
+					<div className=" myBackgroundImage">
+						<img src={BackgroundImage} alt="shopping cart in aisle" />
 					</div>
 				)}
 
 				{loggedIn && (
-					<div>
+					<div className="col-12 mb-3">
 						{/* <ThoughtForm /> */}
 						<h1>Let's upload some photos!</h1>
 					</div>
 				)}
 				<div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
-					{!Auth.loggedIn() ? (
-						<>
-							<div class="bg-text">
-								<h2>Help Your Favourite Brand and Be Rewarded</h2>
-							</div>
-						</>
-					) : (
-						<></>
-					)}
+        {!Auth.loggedIn() ? (
+          <>
+        <div class="bg-text">
+						<h2>Help Your Favourite Brand and Be Rewarded</h2>
+					</div>
+          </>
+        ) : (
+          <></>
+        )}
 				</div>
 				{loggedIn && userData ? (
 					<div className="col-12 col-lg-3 mb-3"></div>
