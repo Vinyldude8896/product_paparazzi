@@ -177,6 +177,7 @@ nav a:hover {
 
 /* CARDS */
 .card {
+  font-family: "Raleway", sans-serif;;
 	margin: 0 0 20px 0;
 	border: 3px solid var(--dark);
 	border-radius: var(--border-radius);
@@ -185,6 +186,7 @@ nav a:hover {
 }
 
 .card-header {
+  font-weight: bolder;
 	color: var(--secondary);
 	margin: 0;
 	background-color: var(--dark);
