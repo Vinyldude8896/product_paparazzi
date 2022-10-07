@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import NoMatch from './pages/NoMatch';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
+import UploadCandid from './pages/UploadCandid';
 
 const httpLink = createHttpLink({
   uri: process.env.NODE_ENV === "development" ? "http://localhost:3001/graphql": '/graphql',
@@ -60,6 +61,10 @@ function App() {
               <Route 
                 path="/profile" 
                 element={<Profile />} 
+              />
+              <Route 
+                path="/upload-candid" 
+                element={<UploadCandid />} 
               />
               <Route 
                 path="*" 
