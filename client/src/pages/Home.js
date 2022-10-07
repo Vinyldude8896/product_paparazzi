@@ -15,8 +15,13 @@ const Home = () => {
 
 	return (
 		<main>
-			<div className="flex-row justify-space-between">
-				<img src={BackgroundImage} className="myBackgroundImage" />
+			<div className="col-12">
+				{!loggedIn && (
+					<div className=" myBackgroundImage">
+						<img src={BackgroundImage} alt="shopping cart in aisle" />
+					</div>
+				)}
+
 				{loggedIn && (
 					<div className="col-12 mb-3">
 						{/* <ThoughtForm /> */}
