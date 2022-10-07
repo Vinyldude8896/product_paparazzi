@@ -27,10 +27,13 @@ const Header = () => {
 						</>
 					) : (
 						<>
-							<Link to="/login">Login</Link>
+							<Link to="/howItWorks">How it Works</Link>
+              <Link to="/Incentives_about">Incentives</Link>
 							<Link to="/signup">Signup</Link>
+              <Link to="/login">Login</Link>
 						</>
 					)}
+
 				</nav>
 			</div>
 		</header>
