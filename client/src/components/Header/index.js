@@ -14,11 +14,7 @@ const Header = () => {
 		<header className="bg-secondary py-2 flex-row align-center">
 			<div className="container flex-row justify-space-between-lg justify-center align-center">
 				<Link to="/">
-<<<<<<< HEAD
-					<h1>Product Paparazzi</h1>
-=======
 					<img className="logo" src={PaparazziLogo} alt="camera with logo" />
->>>>>>> feature/html
 				</Link>
 				<div class="bg-text">
 					<h2>Help Your Favourite Brand and Be Rewarded</h2>
@@ -27,7 +23,7 @@ const Header = () => {
 				<nav className="text-center">
 					{Auth.loggedIn() ? (
 						<>
-            <Link to="/Incentives">My Incentives</Link>
+							<Link to="/Incentives">My Incentives</Link>
 							<Link to="/profile">My Candids</Link>
 							<a href="/" onClick={logout}>
 								Logout

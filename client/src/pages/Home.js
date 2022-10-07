@@ -32,23 +32,20 @@ const Home = () => {
 						<h1>Let's upload some photos!</h1>
 					</div>
 				)}
-<<<<<<< HEAD
 				<div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
-        {!Auth.loggedIn() ? (
-          <>
-        <div class="bg-text">
-						<h2>Help Your Favourite Brand and Be Rewarded</h2>
-					</div>
-          </>
-        ) : (
-          <></>
-        )}
+					{!Auth.loggedIn() ? (
+						<>
+							<div class="bg-text">
+								<h2>Help Your Favourite Brand and Be Rewarded</h2>
+							</div>
+						</>
+					) : (
+						<></>
+					)}
 				</div>
 				{loggedIn && userData ? (
 					<div className="col-12 col-lg-3 mb-3"></div>
 				) : null}
-=======
->>>>>>> feature/html
 			</div>
 		</main>
 	);
