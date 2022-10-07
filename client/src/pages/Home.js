@@ -14,8 +14,8 @@ const Home = () => {
 	const loggedIn = Auth.loggedIn();
 
 	return (
-		<main>
-			<div className="col-12">
+		<main >
+			<div className="col-12 ">
 				{!loggedIn && (
 					<div className=" myBackgroundImage">
 						<img src={BackgroundImage} alt="shopping cart in aisle" />
