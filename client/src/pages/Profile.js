@@ -5,6 +5,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
+import Kombucha1 from "../images/Kombucha1.png";
+import Kombucha2 from "../images/Kombucha2.png";
+import Kombucha3 from "../images/Kombucha3.png";
+import Kombucha4 from "../images/Kombucha4.png";
+import Kombucha5 from "../images/Kombucha5.png";
+import Kombucha6 from "../images/Kombucha6.png";
+
 const Profile = (props) => {
   const { username: userParam } = useParams();
 
@@ -23,6 +30,39 @@ const Profile = (props) => {
     return <div>Loading...</div>;
   }
 
+  const portfolios = [
+    {
+      image: Kombucha1,
+      productName: 'Kombucha1',
+      retailer: 'Loblaws'
+    },
+    {
+      image: Kombucha2,
+      productName: 'Kombucha2',
+      retailer: 'Metro'
+    },
+    {
+      image: Kombucha3,
+      productName: 'Kombucha3',
+      retailer: 'Sobeys'
+    },
+    {
+      image: Kombucha4,
+      productName: 'Kombucha4',
+      retailer: 'Fortinos'
+    },
+    {
+      image: Kombucha5,
+      productName: 'Kombucha5',
+      retailer: 'Fortinos'
+    },
+    {
+      image: Kombucha6,
+      productName: 'Kombucha6',
+      retailer: 'Fortinos'
+    },
+  ];
+
   // if (!user?.username) {
   //   return (
   //     <h4>
@@ -39,13 +79,29 @@ const Profile = (props) => {
           Viewing {userParam ? `${user.username}'s` : "your"} profile.
         </h2>
       </div>
-    <h2>Let's upload some photos.</h2>
-      <div className="flex-row justify-space-between mb-3">
-        <div className="col-12 mb-3 col-lg-8"></div>
-        <div className="col-12 col-lg-3 mb-3"></div>
+      <div className="col-md-4 services">
+        {portfolios.map(({ image, productName, retailer }) => (
+          <div key={image} className="">
+            <img
+              src={image}
+              alt={retailer}
+              className=""
+            />
+            <p className="mt-4 text-center">{retailer}</p>
+            <div className="flex items-center justify-center">
+              <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
+                <a href={retailer} target="_blank" rel="noreferrer">Demo</a>
+              </button>
+              <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
+                <a href={productName} target="_blank" rel="noreferrer">Repo</a>
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
+
 };
 
 export default Profile;
