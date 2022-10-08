@@ -18,6 +18,10 @@
 	box-sizing: border-box;
 }
 
+.input-error {
+	border: solid 2px var(--error);
+}
+
 .myBackgroundImage {
 	width: 1450px;
 	height: 500px;
