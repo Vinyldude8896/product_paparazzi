@@ -11,6 +11,12 @@ import Kombucha3 from "../images/Kombucha3.png";
 import Kombucha4 from "../images/Kombucha4.png";
 import Kombucha5 from "../images/Kombucha5.png";
 import Kombucha6 from "../images/Kombucha6.png";
+import logoLoblaws from "../images/LogoLoblaws.png";
+import logoSobeys from "../images/LogoSobeys.jpg";
+import logoMetro from "../images/LogoMetro.jpg";
+import logoWholefoods from "../images/LogoWholefoods.png";
+import logoFortinos from "../images/LogoFortinos.jpg";
+
 
 const Profile = (props) => {
   const { username: userParam } = useParams();
@@ -32,34 +38,40 @@ const Profile = (props) => {
 
   const portfolios = [
     {
-      image: Kombucha1,
+      shelfImage: Kombucha1,
       productName: 'Kombucha1',
-      retailer: 'Loblaws'
+      retailer: 'Loblaws',
+      retailerLogo:logoLoblaws
     },
     {
-      image: Kombucha2,
+      shelfImage: Kombucha2,
       productName: 'Kombucha2',
-      retailer: 'Metro'
+      retailer: 'Metro',
+      retailerLogo: logoMetro
     },
     {
-      image: Kombucha3,
+      shelfImage: Kombucha3,
       productName: 'Kombucha3',
-      retailer: 'Sobeys'
+      retailer: 'Sobeys',
+      retailerLogo: logoSobeys
     },
     {
-      image: Kombucha4,
+      shelfImage: Kombucha4,
       productName: 'Kombucha4',
-      retailer: 'Fortinos'
+      retailer: 'Whole Foods Market',
+      retailerLogo: logoWholefoods
     },
     {
-      image: Kombucha5,
+      shelfImage: Kombucha5,
       productName: 'Kombucha5',
-      retailer: 'Fortinos'
+      retailer: 'Metro',
+      retailerLogo: logoMetro
     },
     {
-      image: Kombucha6,
+      shelfImage: Kombucha6,
       productName: 'Kombucha6',
-      retailer: 'Fortinos'
+      retailer: 'Fortinos',
+      retailerLogo: logoFortinos
     },
   ];
 
@@ -80,22 +92,23 @@ const Profile = (props) => {
         </h2>
       </div>
       <div className="col-md-4 services">
-        {portfolios.map(({ image, productName, retailer }) => (
-          <div key={image} className="">
+        {portfolios.map(({ shelfImage, productName, retailer, retailerLogo }) => (
+          <div className="card">
+          <div key={shelfImage} className="">
+            <p className="flex-row mb-3 text-center">
             <img
-              src={image}
+              src={retailerLogo}
               alt={retailer}
-              className=""
+              className="retailerLogo"
             />
-            <p className="mt-4 text-center">{retailer}</p>
-            <div className="flex items-center justify-center">
-              <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
-                <a href={retailer} target="_blank" rel="noreferrer">Demo</a>
-              </button>
-              <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
-                <a href={productName} target="_blank" rel="noreferrer">Repo</a>
-              </button>
-            </div>
+              {retailer}, 
+              {productName}</p>
+            <img
+              src={shelfImage}
+              alt={retailer}
+              className="shelfImage"
+            />
+          </div>
           </div>
         ))}
       </div>
