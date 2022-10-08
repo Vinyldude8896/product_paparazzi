@@ -15,11 +15,11 @@ const Home = () => {
 
 	return (
 		<main>
-			<div className="col-12">
+			<div className="col-12 ">
 				{!loggedIn && (
 					<div>
 						<img
-							className="myBackgroundImage"
+							className=" myBackgroundImage"
 							src={BackgroundImage}
 							alt="shopping cart in aisle"
 						/>
@@ -27,11 +27,22 @@ const Home = () => {
 				)}
 
 				{loggedIn && (
-					<div>
+					<div className="col-12 mb-3">
 						{/* <ThoughtForm /> */}
 						<h1>Let's upload some photos!</h1>
 					</div>
 				)}
+				<div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
+					{!Auth.loggedIn() ? (
+						<>
+							<div class="bg-text">
+								<h2>Help Your Favourite Brand and Be Rewarded</h2>
+							</div>
+						</>
+					) : (
+						<></>
+					)}
+				</div>
 			</div>
 		</main>
 	);
