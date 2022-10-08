@@ -15,10 +15,10 @@ const Home = () => {
 
 	return (
 		<main >
-			<div className="col-12 ">
+			<div className="col-12">
 				{!loggedIn && (
-					<div className=" myBackgroundImage">
-						<img src={BackgroundImage} alt="shopping cart in aisle" />
+					<div>
+						<img className=" myBackgroundImage" src={BackgroundImage} alt="shopping cart in aisle" />
 					</div>
 				)}
 
