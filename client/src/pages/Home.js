@@ -5,8 +5,8 @@ import { QUERY_ME_BASIC } from "../utils/queries";
 import BackgroundImage from "../images/shopcartaisle.jpeg";
 
 const Home = () => {
-	// const { loading, data } = useQuery(QUERY_THOUGHTS);
-	const { data: userData } = useQuery(QUERY_ME_BASIC);
+	// // const { loading, data } = useQuery(QUERY_THOUGHTS);
+	// const { data: userData } = useQuery(QUERY_ME_BASIC);
 
 	// will import out photos here
 	// const thoughts = data?.thoughts || [];
