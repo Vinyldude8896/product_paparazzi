@@ -1,6 +1,6 @@
 import React from "react";
 
-const UploadCandidForm = () => {
+const CandidForm = () => {
   return (
     <form>
       <div class="form-group">
@@ -44,4 +44,4 @@ const UploadCandidForm = () => {
   );
 };
 
-export default UploadCandidForm;
+export default CandidForm;

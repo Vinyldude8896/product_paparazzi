@@ -73,7 +73,7 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-      <div className="card mt-3 ml-5">
+      <div className="card mt-3 ml-5 mb-3">
         <div className="card-header">Here is your Incentive Level</div>
         <div className="card-body">
           {/* This will use the variablesPhotos parameters */}
