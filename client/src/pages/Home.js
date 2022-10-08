@@ -14,11 +14,15 @@ const Home = () => {
 	const loggedIn = Auth.loggedIn();
 
 	return (
-		<main >
+		<main>
 			<div className="col-12 ">
 				{!loggedIn && (
-					<div className=" myBackgroundImage">
-						<img src={BackgroundImage} alt="shopping cart in aisle" />
+					<div>
+						<img
+							className=" myBackgroundImage"
+							src={BackgroundImage}
+							alt="shopping cart in aisle"
+						/>
 					</div>
 				)}
 
@@ -29,15 +33,15 @@ const Home = () => {
 					</div>
 				)}
 				<div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
-        {!Auth.loggedIn() ? (
-          <>
-        <div class="bg-text">
-						<h2>Help Your Favourite Brand and Be Rewarded</h2>
-					</div>
-          </>
-        ) : (
-          <></>
-        )}
+					{!Auth.loggedIn() ? (
+						<>
+							<div class="bg-text">
+								<h2>Help Your Favourite Brand and Be Rewarded</h2>
+							</div>
+						</>
+					) : (
+						<></>
+					)}
 				</div>
 			</div>
 		</main>
