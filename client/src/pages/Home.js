@@ -14,9 +14,14 @@ const Home = () => {
 	const loggedIn = Auth.loggedIn();
 
 	return (
-		<main>
-			<div className="flex-row justify-space-between">
-				<img src={BackgroundImage} className="myBackgroundImage" />
+		<main >
+			<div className="col-12">
+				{!loggedIn && (
+					<div>
+						<img className=" myBackgroundImage" src={BackgroundImage} alt="shopping cart in aisle" />
+					</div>
+				)}
+
 				{loggedIn && (
 					<div className="col-12 mb-3">
 						{/* <ThoughtForm /> */}
@@ -24,14 +29,15 @@ const Home = () => {
 					</div>
 				)}
 				<div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
-					{/* {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <ThoughtList
-              thoughts={thoughts}
-              title="Some Feed for Thought(s)..."
-            />
-          )} */}
+        {!Auth.loggedIn() ? (
+          <>
+        <div class="bg-text">
+						<h2>Help Your Favourite Brand and Be Rewarded</h2>
+					</div>
+          </>
+        ) : (
+          <></>
+        )}
 				</div>
 				{loggedIn && userData ? (
 					<div className="col-12 col-lg-3 mb-3"></div>
@@ -40,5 +46,5 @@ const Home = () => {
 		</main>
 	);
 };
-
+//adding comment so i can push
 export default Home;
