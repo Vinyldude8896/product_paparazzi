@@ -30,3 +30,25 @@
 //   console.log('all done!');
 //   process.exit(0);
 // });
+
+const db = require('../config/connection');
+const { Retailer } = require('../models');
+
+db.once('open', async () => {
+  await Retailer.deleteMany();
+
+  const retailers = await Retailer.insertMany([
+    { name: 'Walmart', image: 'walmart.jpg' }, // potentially have an image as well
+    { name: 'Zellers', image: 'zellers.jpg' },
+    { name: 'Best Buy', image: 'best_buy.jpg' },
+    { name: 'The Bay', image: 'the_bay.jpg' },
+    { name: 'Food Basics', image: 'food_basics.jpg' },
+    { name: 'NoFrills', image: 'nofrills.jpg' },
+    { name: 'Freshco', image: 'freshco.jpg' },
+  ]);
+
+  console.log('retailers seeded');
+
+
+  process.exit();
+});
