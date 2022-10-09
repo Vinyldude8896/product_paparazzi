@@ -22,6 +22,7 @@ const Header = () => {
 						<>
 							<Link to="/Incentives">My Incentives</Link>
 							<Link to="/profile">My Candids</Link>
+							<span className="line">|</span>
 							<a href="/" onClick={logout}>
 								Logout
 							</a>
@@ -31,11 +32,10 @@ const Header = () => {
 							<Link to="/incentive">Incentives</Link>
 							<Link to="/howitworks">How It Works</Link>
 							<Link to="/signup">Signup</Link>
-              <span className="line">|</span>
-              <Link to="/login">Login</Link>
+							<span className="line">|</span>
+							<Link to="/login">Login</Link>
 						</>
 					)}
-
 				</nav>
 			</div>
 		</header>

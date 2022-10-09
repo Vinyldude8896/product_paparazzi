@@ -17,6 +17,7 @@
     "web-vitals": "^3.0.2"
   },
   "dependencies": {
+    "@shopify/shopify-api": "^5.2.0",
     "node": "^16.15.1",
     "nvm": "^0.0.4"
   }
