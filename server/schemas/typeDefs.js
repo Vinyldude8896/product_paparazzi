@@ -15,6 +15,11 @@ const typeDefs = gql`
 
   scalar Upload
   
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
   type Retailer {
     _id: ID!
     name: String!

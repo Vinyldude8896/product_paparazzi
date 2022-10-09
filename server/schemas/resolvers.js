@@ -38,7 +38,7 @@ const resolvers = {
   },
 
   Mutation: {
-    fileupload: async (parent, {file}, context) => {
+    fileUpload: async (parent, {file}, context) => {
       if (context.user) {
         console.log(
           "Called File Upload",
