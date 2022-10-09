@@ -4,7 +4,6 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
@@ -22,12 +21,12 @@ import Incentives from "./pages/Incentives";
 import UploadCandid from './pages/UploadCandid';
 
 
-const httpLink = createHttpLink({
-  uri:
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3001/graphql"
-      : "/graphql",
-});
+// const httpLink = createHttpLink({
+//   uri:
+//     process.env.NODE_ENV === "development"
+//       ? "http://localhost:3001/graphql"
+//       : "/graphql",
+// });
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
