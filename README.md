@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+### Product Paparazzi
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### User Story
 
-## Available Scripts
 
-In the project directory, you can run:
+### Features
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### badges
+![HTML](https://img.shields.io/badge/HTML-License-blue)
+![React.js](https://img.shields.io/badge/React.js-License-yellowgreen)
+![JavaScript](https://img.shields.io/badge/JavaScript-License-lightblue)
+![MONGODB](https://img.shields.io/badge/MONGODB-License-lightgrey)
+![GRAPHQL](https://img.shields.io/badge/GRAPHQL-License-yellowgreen)
+![APOLLO](https://img.shields.io/badge/Apollo-License-lightblue)
+![Stripe](https://img.shields.io/badge/Stripe-License-lightblue)
 
-### `npm test`
+## Table of Contents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [installation](#installation)
+- [contribution guidelines](#contribution)
+- [Test Instructions](#testing)
+- [License](#license)
+- [Questions](#questions)
 
-### `npm run build`
+### Installation
+1. Please clone the github repo here :
+https://github.com/Vinyldude8896/shop-shop
+2. Run npm install to install the dependecies.
+3. Then at the root folder, run npm run develop and go to:
+http://localhost:3001
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Contribution Guidelines
+Current contributers:
+Kevin Reid : https://github.com/Vinyldude8896 <br />
+Fumi Tsukamoto: https://github.com/fumixer <br />
+Alexandre Savov: https://github.com/AlexxSavov <br />
+Michelle Amuodmi: https://github.com/Amuodmi
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Testing
+To test this app:<br />
+1. Clone the repo here : https://github.com/Vinyldude8896/shop-shop <br />
+2. Install depenencies using npm istall. <br />
+3. from the root folder run npm run develop <br />
+4. Browser should open to this page: http://localhost:3001 <br />
+5. Try sigining up and logging into the site <br />
+6. Try adding items to your cart <br />
+7. Navigate away from the page and return, cart items should persist <br />
+8. Test the checkout to make sure the Strip page loads 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Questions
+    email address : kevinnivek@me.com
+    - additional instructions 
+    I can be contacted by phone as well, but prefer email contact first.
+### Images
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

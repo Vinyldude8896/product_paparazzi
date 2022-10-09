@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, useParams } from "react-router-dom";
 
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
@@ -11,6 +11,12 @@ import Kombucha3 from "../images/Kombucha3.png";
 import Kombucha4 from "../images/Kombucha4.png";
 import Kombucha5 from "../images/Kombucha5.png";
 import Kombucha6 from "../images/Kombucha6.png";
+import logoLoblaws from "../images/LogoLoblaws.png";
+import logoSobeys from "../images/LogoSobeys.jpg";
+import logoMetro from "../images/LogoMetro.jpg";
+import logoWholefoods from "../images/LogoWholefoods.png";
+import logoFortinos from "../images/LogoFortinos.jpg";
+
 
 const Profile = (props) => {
   const { username: userParam } = useParams();
@@ -32,34 +38,46 @@ const Profile = (props) => {
 
   const portfolios = [
     {
-      image: Kombucha1,
+      shelfImage: Kombucha1,
       productName: 'Kombucha1',
-      retailer: 'Loblaws'
+      retailer: 'Loblaws',
+      retailerLogo: logoLoblaws,
+      dateUploaded: new Date().getMonth()
     },
     {
-      image: Kombucha2,
+      shelfImage: Kombucha2,
       productName: 'Kombucha2',
-      retailer: 'Metro'
+      retailer: 'Metro',
+      retailerLogo: logoMetro,
+      dateUploaded: new Date().getMonth()
     },
     {
-      image: Kombucha3,
+      shelfImage: Kombucha3,
       productName: 'Kombucha3',
-      retailer: 'Sobeys'
+      retailer: 'Sobeys',
+      retailerLogo: logoSobeys,
+      dateUploaded: new Date().getMonth()
     },
     {
-      image: Kombucha4,
+      shelfImage: Kombucha4,
       productName: 'Kombucha4',
-      retailer: 'Fortinos'
+      retailer: 'WFM',
+      retailerLogo: logoWholefoods,
+      dateUploaded: new Date().getMonth()
     },
     {
-      image: Kombucha5,
+      shelfImage: Kombucha5,
       productName: 'Kombucha5',
-      retailer: 'Fortinos'
+      retailer: 'Metro',
+      retailerLogo: logoMetro,
+      dateUploaded: new Date().getMonth()
     },
     {
-      image: Kombucha6,
+      shelfImage: Kombucha6,
       productName: 'Kombucha6',
-      retailer: 'Fortinos'
+      retailer: 'Fortinos',
+      retailerLogo: logoFortinos,
+      dateUploaded: new Date().getMonth()
     },
   ];
 
@@ -79,22 +97,24 @@ const Profile = (props) => {
           Viewing {userParam ? `${user.username}'s` : "your"} profile.
         </h2>
       </div>
-      <div className="col-md-4 services">
-        {portfolios.map(({ image, productName, retailer }) => (
-          <div key={image} className="">
-            <img
-              src={image}
-              alt={retailer}
-              className=""
-            />
-            <p className="mt-4 text-center">{retailer}</p>
-            <div className="flex items-center justify-center">
-              <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
-                <a href={retailer} target="_blank" rel="noreferrer">Demo</a>
-              </button>
-              <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
-                <a href={productName} target="_blank" rel="noreferrer">Repo</a>
-              </button>
+      <div className="pictureBox">
+        {portfolios.map(({ shelfImage, productName, retailer, retailerLogo, dateUploaded }) => (
+          <div className="card">
+            <div key={shelfImage} className="">
+              <p className="">
+                <img
+                  src={retailerLogo}
+                  alt={retailer}
+                  className="retailerLogo"
+                />
+                {retailer}   ,
+                {productName}  ,
+                Date updated {dateUploaded} </p>
+              <img
+                src={shelfImage}
+                alt={retailer}
+                className="shelfImage"
+              />
             </div>
           </div>
         ))}
