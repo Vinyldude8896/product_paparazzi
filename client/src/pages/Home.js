@@ -5,8 +5,8 @@ import { QUERY_ME_BASIC } from "../utils/queries";
 import BackgroundImage from "../images/shopcartaisle.jpeg";
 
 const Home = () => {
-	// const { loading, data } = useQuery(QUERY_THOUGHTS);
-	const { data: userData } = useQuery(QUERY_ME_BASIC);
+	// // const { loading, data } = useQuery(QUERY_THOUGHTS);
+	// const { data: userData } = useQuery(QUERY_ME_BASIC);
 
 	// will import out photos here
 	// const thoughts = data?.thoughts || [];
@@ -15,11 +15,11 @@ const Home = () => {
 
 	return (
 		<main>
-			<div className="col-12">
+			<div className="col-12 ">
 				{!loggedIn && (
 					<div>
 						<img
-							className="myBackgroundImage"
+							className=" myBackgroundImage"
 							src={BackgroundImage}
 							alt="shopping cart in aisle"
 						/>
@@ -27,7 +27,7 @@ const Home = () => {
 				)}
 
 				{loggedIn && (
-					<div>
+					<div className="col-12 mb-3">
 						{/* <ThoughtForm /> */}
 						<h1>Let's upload some photos!</h1>
 					</div>
@@ -43,12 +43,9 @@ const Home = () => {
 						<></>
 					)}
 				</div>
-				{loggedIn && userData ? (
-					<div className="col-12 col-lg-3 mb-3"></div>
-				) : null}
 			</div>
 		</main>
 	);
 };
-//adding comment so i can push
+
 export default Home;
