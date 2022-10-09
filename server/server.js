@@ -1,4 +1,5 @@
 const express = require("express");
+const graphqlUploadExpress = require("graphql-upload/graphqlUploadExpress.js");
 const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
 

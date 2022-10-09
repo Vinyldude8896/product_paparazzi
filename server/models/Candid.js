@@ -1,5 +1,6 @@
 
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 const candidSchema = new Schema(
   {
     image: {
@@ -14,16 +15,21 @@ const candidSchema = new Schema(
       minlength: 1,
       maxlength: 280
     },
-    retilerId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Retailer',
+    retailer: {
+      type: String,
       required: true,
+      minlength: 1,
+      maxlength: 55
     },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true, 
-    }
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: timestamp => dateFormat(timestamp)
+      },
+    username: {
+        type: String,
+        required: true
+      },
   },
   {
     toJSON: {

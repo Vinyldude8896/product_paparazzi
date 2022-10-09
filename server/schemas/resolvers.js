@@ -1,13 +1,17 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Candid } = require('../models');
 const { signToken } = require('../utils/auth');
+const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
+const { finished } = require('stream');
 
 const resolvers = {
+  Upload: GraphQLUpload,
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__v -password')
+          .populate('candids');
 
 
         return userData;
@@ -18,11 +22,13 @@ const resolvers = {
     users: async () => {
       return User.find()
         .select('-__v -password')
+        .populate('candids');
 
     },
     user: async (parent, { username }) => {
       return User.findOne({ username })
         .select('-__v -password')
+        .populate('candids')
 
     },
     retailers: async () => {
@@ -32,6 +38,40 @@ const resolvers = {
   },
 
   Mutation: {
+    fileupload: async (parent, {file}, context) => {
+      if (context.user) {
+        console.log(
+          "Called File Upload",
+          file,
+          "user uploading the photo",
+          context.user
+        );
+        const { createReadStream, filename, mimetype, encoding} =
+          await file;
+
+          await Candid.create({
+            image: filename,
+            productName: "Miso Soup",
+            retailer: "Walmart",
+            username: context.user.username,
+          });
+
+          // Invoking the 'CreateReadStream' will return a readable Stream,
+          const stream = createReadStream();
+
+          const out = require("fs").createWriteStream(
+            `.Photos/${filename}`
+          );
+          stream.pipe(out);
+          await finished(out);
+
+          return {filename, mimetype, encoding};
+
+      } else {
+        new AuthenticationError ("You must be logged in to upload a Candid");
+      }
+
+    },
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);

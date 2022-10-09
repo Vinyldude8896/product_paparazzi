@@ -25,29 +25,37 @@ export const ADD_USER = gql`
 `;
 
 
-export const ADD_FRIEND = gql`
-  mutation addFriend($id: ID!) {
-    addFriend(friendId: $id) {
+export const ADD_CANDID = gql`
+  mutation addCandid($image: String!, productName: String!, retailer: String!) {
+    addCandid(image: $image) {
+      _id
+      image
+      productName
+      retailer
+      createdAt
+    }
+  }
+`;
+
+export const REMOVE_CANDID = gql`
+  mutation removeCandid($id: ID!) {
+    removeCandid(id: $id) {
       _id
       username
-      friendCount
-      friends {
+      candids {
         _id
-        username
+        image
       }
     }
   }
 `;
 
-export const REMOVE_FRIEND = gql`
-  mutation removeFriend($id: ID!) {
-    removeFriend(id: $id) {
-      _id
-      username
-      friends {
-        _id
-        username
-      }
+export const UPLOAD_FILE = gql`
+    mutation FileUpload($file: Upload!) {
+        fileUpload(file: $file) {
+            filename
+            mimetype
+            encoding
+        }
     }
-  }
 `;

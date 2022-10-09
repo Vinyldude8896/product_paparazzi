@@ -6,10 +6,13 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      friendCount
-      friends {
+      candidCount
+      candids {
         _id
-        username
+        image
+        productName
+        retailer
+        createdAt
       }
     }
   }
@@ -21,10 +24,13 @@ export const QUERY_ME = gql`
       _id
       username
       email
-      friendCount
-      friends {
+      candidCount
+      candids {
         _id
-        username
+        image
+        productName
+        retailer
+        createdAt
       }
     }
   }
@@ -36,11 +42,35 @@ export const QUERY_ME_BASIC = gql`
       _id
       username
       email
-      friendCount
-      friends {
+      candidCount
+      candids {
         _id
-        username
+        image
       }
     }
   }
 `;
+
+export const QUERY_CANDIDS = gql `
+query candid($username: String) {
+  candids(username: $username) {
+    _id
+    image
+    productName
+    retailer
+    createdAt
+    username
+  }
+}`
+
+export const QUERY_CANDID = gql `
+query candid($id: ID!) {
+  candid(_id: $id) {
+    _id
+    image
+    productName
+    retailer
+    createdAt
+    username
+  }
+}`

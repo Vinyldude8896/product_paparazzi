@@ -5,13 +5,15 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    friendCount: Int
-    friends: [User]
+    candidCount: Int
+    candids: [Candid]
   }
   type Auth {
     token: ID!
     user: User
   }
+
+  scalar Upload
   
   type Retailer {
     _id: ID!
@@ -21,8 +23,8 @@ const typeDefs = gql`
   
   type Candid {
     _id: ID!
-    productName: String!
     image: String!
+    productName: String!
     retailer: ID!
   }
   
@@ -33,10 +35,11 @@ const typeDefs = gql`
     retailers: [Retailer]
   }
   type Mutation {
+    fileUpload(file: Upload!): File!
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addFriend(friendId: ID!): User
-    addCandid(productName: String!, image: String!, retailerId: ID!, userId: ID!): Candid
+    addCandid(image: String!, productName: String!, retailer: String!, username: String!): Candid
   }
 `;
 
