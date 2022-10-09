@@ -11,12 +11,15 @@ import { setContext } from "@apollo/client/link/context";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import NoMatch from "./pages/NoMatch";
-import Profile from "./pages/Profile";
-import Signup from "./pages/Signup";
+
+import Home from './pages/Home';
+import Login from './pages/Login';
+import NoMatch from './pages/NoMatch';
+import Profile from './pages/Profile';
+import Signup from './pages/Signup';
 import Incentives from "./pages/Incentives";
+import UploadCandid from './pages/UploadCandid';
+
 
 const httpLink = createHttpLink({
   uri:
@@ -48,12 +51,34 @@ function App() {
           <Header />
           <div className="container">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/incentives" element={<Incentives />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="*" element={<NoMatch />} />
+              <Route 
+                path="/" 
+                element={<Home />} 
+              />
+              <Route 
+                path="/login" 
+                element={<Login />} 
+              />
+              <Route 
+                path="/signup" 
+                element={<Signup />} 
+              />
+              <Route 
+                path="/profile" 
+                element={<Profile />} 
+              />
+              <Route 
+              path="/incentives" 
+              element={<Incentives />} 
+              />
+              <Route 
+                path="/upload-candid" 
+                element={<UploadCandid />} 
+              />
+              <Route 
+                path="*" 
+                element={<NoMatch />} 
+              />
             </Routes>
           </div>
           <Footer />
