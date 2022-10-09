@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, useParams } from "react-router-dom";
 
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 
@@ -41,37 +41,43 @@ const Profile = (props) => {
       shelfImage: Kombucha1,
       productName: 'Kombucha1',
       retailer: 'Loblaws',
-      retailerLogo:logoLoblaws
+      retailerLogo: logoLoblaws,
+      dateUploaded: new Date().getMonth()
     },
     {
       shelfImage: Kombucha2,
       productName: 'Kombucha2',
       retailer: 'Metro',
-      retailerLogo: logoMetro
+      retailerLogo: logoMetro,
+      dateUploaded: new Date().getMonth()
     },
     {
       shelfImage: Kombucha3,
       productName: 'Kombucha3',
       retailer: 'Sobeys',
-      retailerLogo: logoSobeys
+      retailerLogo: logoSobeys,
+      dateUploaded: new Date().getMonth()
     },
     {
       shelfImage: Kombucha4,
       productName: 'Kombucha4',
-      retailer: 'Whole Foods Market',
-      retailerLogo: logoWholefoods
+      retailer: 'WFM',
+      retailerLogo: logoWholefoods,
+      dateUploaded: new Date().getMonth()
     },
     {
       shelfImage: Kombucha5,
       productName: 'Kombucha5',
       retailer: 'Metro',
-      retailerLogo: logoMetro
+      retailerLogo: logoMetro,
+      dateUploaded: new Date().getMonth()
     },
     {
       shelfImage: Kombucha6,
       productName: 'Kombucha6',
       retailer: 'Fortinos',
-      retailerLogo: logoFortinos
+      retailerLogo: logoFortinos,
+      dateUploaded: new Date().getMonth()
     },
   ];
 
@@ -91,24 +97,25 @@ const Profile = (props) => {
           Viewing {userParam ? `${user.username}'s` : "your"} profile.
         </h2>
       </div>
-      <div className="col-md-4 services">
-        {portfolios.map(({ shelfImage, productName, retailer, retailerLogo }) => (
+      <div className="pictureBox">
+        {portfolios.map(({ shelfImage, productName, retailer, retailerLogo, dateUploaded }) => (
           <div className="card">
-          <div key={shelfImage} className="">
-            <p className="flex-row mb-3 text-center">
-            <img
-              src={retailerLogo}
-              alt={retailer}
-              className="retailerLogo"
-            />
-              {retailer}, 
-              {productName}</p>
-            <img
-              src={shelfImage}
-              alt={retailer}
-              className="shelfImage"
-            />
-          </div>
+            <div key={shelfImage} className="">
+              <p className="">
+                <img
+                  src={retailerLogo}
+                  alt={retailer}
+                  className="retailerLogo"
+                />
+                {retailer}   ,
+                {productName}  ,
+                Date updated {dateUploaded} </p>
+              <img
+                src={shelfImage}
+                alt={retailer}
+                className="shelfImage"
+              />
+            </div>
           </div>
         ))}
       </div>
