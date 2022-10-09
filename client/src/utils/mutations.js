@@ -26,7 +26,7 @@ export const ADD_USER = gql`
 
 
 export const ADD_CANDID = gql`
-  mutation addCandid($image: String!, productName: String!, retailer: String!) {
+  mutation addCandid($image: String!, $productName: String!, $retailer: String!) {
     addCandid(image: $image) {
       _id
       image
