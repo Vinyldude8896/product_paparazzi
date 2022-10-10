@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Candid, Photo } = require('../models');
 const { signToken } = require('../utils/auth');
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
-const { finished } = require('stream');
+const { finished } = require('stream/promises');
 
 const resolvers = {
   Upload: GraphQLUpload,
@@ -50,18 +50,18 @@ const resolvers = {
         const { createReadStream, filename, mimetype, encoding} =
           await file;
 
-          await Photo.create({
-            photoText: filename,
-            location: "some photo location",
-            user_id: context.user._id,
-        });
+        //   await Photo.create({
+        //     photoText: filename,
+        //     location: "some photo location",
+        //     user_id: context.user._id,
+        // });
 
-          // await Photo.create({
-          //   image: filename,
-          //   productName: "Miso Soup",
-          //   retailer: "Walmart",
-          //   username: context.user.username,
-          // });
+          await Candid.create({
+            image: filename,
+            productName: "Miso Soup",
+            retailer: "Walmart",
+            username: context.user.username,
+          });
 
           // Invoking the 'CreateReadStream' will return a readable Stream,
           const stream = createReadStream();
