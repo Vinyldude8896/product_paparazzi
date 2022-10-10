@@ -6,6 +6,8 @@ const UploadCandidForm = () => {
   const fileReader = new FileReader();
   const [files, setFiles] = useState([]);
   const [src, setSrc] = useState("");
+  const [product, setProduct] = useState("")
+  const [retailer, setRetailer] = useState("")
   const [loggedIn, setLoggedIn] = useState(false);
   const [fileUploadMutation] = useMutation(UPLOAD_FILE);
 
@@ -19,6 +21,18 @@ const UploadCandidForm = () => {
     };
     if (!(file instanceof Blob)) return;
     fileReader.readAsDataURL(file);
+  }
+
+  function setProductName(event) {
+    const product = document.getElementById("productName").value
+    console.log("Product to be added", product )
+    setProduct(product);
+  }
+
+  function setRetailerName(event) {
+    const retailer = document.getElementById("retailer").value
+    console.log("retailer to be added", retailer )
+    setRetailer(retailer);
   }
 
   function fileUpload(submitEvent) {
@@ -66,9 +80,10 @@ const UploadCandidForm = () => {
               name="productName"
               type="text"
               id="productName"
+              onChange={setProductName}
             />
             <label>Choose a Retailer Below</label>
-            <select className="form-input" id="retailer" name="retailer">
+            <select className="form-input" id="retailer" name="retailer"  onChange={setRetailerName}>
               <option value="Loblaws">Loblaws</option>
               <option value="Sobeys">Sobeys</option>
               <option value="Metro">Metro</option>
@@ -97,10 +112,10 @@ const UploadCandidForm = () => {
                   <div className="card-body">
                     <h5 className="card-title">
                       Product - 
-                      {/* {document.getElementById("productName")} */}
+                      {product}
                     </h5>
                     <h5 className="card-title">
-                      Retailer - 
+                      Retailer - {retailer}
                       {/* {document.getElementById("retailer")} */}
                     </h5>
                     <h5 className="card-title">Date Uploaded - 
