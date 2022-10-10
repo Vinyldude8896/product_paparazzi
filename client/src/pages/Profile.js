@@ -1,121 +1,56 @@
-import React from "react";
-import { Navigate, useParams } from "react-router-dom";
+import React, {useEffect} from "react";
+import { useLocation } from "react-router-dom";
 
-import { useQuery } from "@apollo/client";
-import { QUERY_USER, QUERY_ME } from "../utils/queries";
+import { useLazyQuery } from "@apollo/client";
+import { QUERY_CANDIDS } from "../utils/queries";
 import Auth from "../utils/auth";
-
-import Kombucha1 from "../images/Kombucha1.png";
-import Kombucha2 from "../images/Kombucha2.png";
-import Kombucha3 from "../images/Kombucha3.png";
-import Kombucha4 from "../images/Kombucha4.png";
-import Kombucha5 from "../images/Kombucha5.png";
-import Kombucha6 from "../images/Kombucha6.png";
-import logoLoblaws from "../images/LogoLoblaws.png";
-import logoSobeys from "../images/LogoSobeys.jpg";
-import logoMetro from "../images/LogoMetro.jpg";
-import logoWholefoods from "../images/LogoWholefoods.png";
-import logoFortinos from "../images/LogoFortinos.jpg";
-
+import { SERVER_URL } from "../utils/vars";
 
 const Profile = (props) => {
-  const { username: userParam } = useParams();
-
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
+  const locationKey = useLocation().key;
+  const user =  Auth.getProfile().data;
+  
+  const [getCandids, { loading: loadingCandids, data: candidsData, error }] = useLazyQuery(QUERY_CANDIDS, {
+    variables: { username:  user.username },
   });
 
-  const user = data?.me || data?.user || {};
+  useEffect(() => {
+    //console.log('locaitonKey', locationKey);
+    getCandids();
+  }, [locationKey, getCandids]);
 
-  // navigate to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/profile:username" />;
-  }
-
-  if (loading) {
+  if (loadingCandids || !candidsData) {
     return <div>Loading...</div>;
   }
 
-  const portfolios = [
-    {
-      shelfImage: Kombucha1,
-      productName: 'Kombucha1',
-      retailer: 'Loblaws',
-      retailerLogo: logoLoblaws,
-      dateUploaded: new Date().getMonth()
-    },
-    {
-      shelfImage: Kombucha2,
-      productName: 'Kombucha2',
-      retailer: 'Metro',
-      retailerLogo: logoMetro,
-      dateUploaded: new Date().getMonth()
-    },
-    {
-      shelfImage: Kombucha3,
-      productName: 'Kombucha3',
-      retailer: 'Sobeys',
-      retailerLogo: logoSobeys,
-      dateUploaded: new Date().getMonth()
-    },
-    {
-      shelfImage: Kombucha4,
-      productName: 'Kombucha4',
-      retailer: 'WFM',
-      retailerLogo: logoWholefoods,
-      dateUploaded: new Date().getMonth()
-    },
-    {
-      shelfImage: Kombucha5,
-      productName: 'Kombucha5',
-      retailer: 'Metro',
-      retailerLogo: logoMetro,
-      dateUploaded: new Date().getMonth()
-    },
-    {
-      shelfImage: Kombucha6,
-      productName: 'Kombucha6',
-      retailer: 'Fortinos',
-      retailerLogo: logoFortinos,
-      dateUploaded: new Date().getMonth()
-    },
-  ];
-
-  // if (!user?.username) {
-  //   return (
-  //     <h4>
-  //       You need to be logged in to see this. Use the navigation links above to
-  //       sign up or log in!
-  //     </h4>
-  //   );
-  // }
+  if (error) {
+    return <div>Error occured</div>;
+  }
 
   return (
     <div>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
-          Viewing {userParam ? `${user.username}'s` : "your"} profile.
+          Viewing {`${user.username}'s`} profile.
         </h2>
       </div>
       <div className="pictureBox">
-        {portfolios.map(({ shelfImage, productName, retailer, retailerLogo, dateUploaded }) => (
-          <div className="card">
-            <div key={shelfImage} className="">
-              <p className="">
-                <img
-                  src={retailerLogo}
-                  alt={retailer}
-                  className="retailerLogo"
-                />
-                {retailer}   ,
-                {productName}  ,
-                Date updated {dateUploaded} </p>
-              <img
-                src={shelfImage}
+        {candidsData.candids.map(({ image, productName, retailer, createdAt, _id }) => (
+          <div key={_id} className="card">
+            <p className="">
+              {/* <img
+                src={retailerLogo}
                 alt={retailer}
-                className="shelfImage"
-              />
-            </div>
+                className="retailerLogo"
+              /> */}
+              {retailer}   ,
+              {productName}  ,
+              Date updated {createdAt} </p>
+            <img
+              src={`${SERVER_URL}/candid-photos/${image}`}
+              alt={retailer}
+              className="shelfImage"
+            />
           </div>
         ))}
       </div>

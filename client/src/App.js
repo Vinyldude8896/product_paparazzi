@@ -19,6 +19,7 @@ import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Incentives from "./pages/Incentives";
 import UploadCandid from './pages/UploadCandid';
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 // const httpLink = createHttpLink({
@@ -78,15 +79,27 @@ function App() {
               />
               <Route 
                 path="/profile" 
-                element={<Profile />} 
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                } 
               />
               <Route 
-              path="/incentives" 
-              element={<Incentives />} 
+                path="/incentives" 
+                element={ 
+                  <ProtectedRoute>
+                    <Incentives />
+                  </ProtectedRoute>
+                } 
               />
               <Route 
                 path="/upload-candid" 
-                element={<UploadCandid />} 
+                element={
+                  <ProtectedRoute>
+                    <UploadCandid />
+                  </ProtectedRoute>
+                } 
               />
               <Route 
                 path="*" 

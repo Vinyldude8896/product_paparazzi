@@ -52,7 +52,7 @@ export const QUERY_ME_BASIC = gql`
 `;
 
 export const QUERY_CANDIDS = gql `
-query candid($username: String) {
+query candids($username: String!) {
   candids(username: $username) {
     _id
     image
