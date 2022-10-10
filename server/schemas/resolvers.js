@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Candid } = require('../models');
+const { User, Candid, Photo } = require('../models');
 const { signToken } = require('../utils/auth');
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const { finished } = require('stream');
@@ -39,6 +39,7 @@ const resolvers = {
 
   Mutation: {
     fileUpload: async (parent, {file}, context) => {
+      try {
       if (context.user) {
         console.log(
           "Called File Upload",
@@ -49,18 +50,24 @@ const resolvers = {
         const { createReadStream, filename, mimetype, encoding} =
           await file;
 
-          await Candid.create({
-            image: filename,
-            productName: "Miso Soup",
-            retailer: "Walmart",
-            username: context.user.username,
-          });
+          await Photo.create({
+            photoText: filename,
+            location: "some photo location",
+            user_id: context.user._id,
+        });
+
+          // await Photo.create({
+          //   image: filename,
+          //   productName: "Miso Soup",
+          //   retailer: "Walmart",
+          //   username: context.user.username,
+          // });
 
           // Invoking the 'CreateReadStream' will return a readable Stream,
           const stream = createReadStream();
 
           const out = require("fs").createWriteStream(
-            `.Photos/${filename}`
+            `./Photos/${filename}`
           );
           stream.pipe(out);
           await finished(out);
@@ -70,6 +77,9 @@ const resolvers = {
       } else {
         new AuthenticationError ("You must be logged in to upload a Candid");
       }
+    } catch(error) {
+      console.error("error in server during sile upload", error)
+    }
 
     },
     addUser: async (parent, args) => {

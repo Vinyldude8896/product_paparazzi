@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useMutation } from "@apollo/client";
 import { UPLOAD_FILE, ADD_CANDID, REMOVE_CANDID } from "../../utils/mutations";
-import Button from "react-bootstrap/Button";
 
 const UploadCandidForm = () => {
   const fileReader = new FileReader();
@@ -23,6 +22,7 @@ const UploadCandidForm = () => {
   }
 
   function fileUpload(submitEvent) {
+    console.log("adding this file to storage" + files[0])
     submitEvent.preventDefault();
     (async () => {
       try {
@@ -75,7 +75,7 @@ const UploadCandidForm = () => {
               <option value="Wholefoods">Wholefoods</option>
               <option value="Wholefoods">Fortinos</option>
             </select>
-            <button
+            {/* <button
               className="btn d-block w-100"
               type="submit"
               onClick={() => {
@@ -83,7 +83,7 @@ const UploadCandidForm = () => {
               }}
             >
               Submit
-            </button>
+            </button> */}
             {files.length > 0 && src.length > 0 && (
               <div className="flex flex-wrap card z-10">
                 <div className="w-full text-center pr-5 md:p-2 z-10">
@@ -94,14 +94,18 @@ const UploadCandidForm = () => {
                     width="400px"
                     height={"auto"}
                   ></img>
-                  <div clasName="card-body">
+                  <div className="card-body">
                     <h5 className="card-title">
-                      Product - {document.getElementById("productName")}
+                      Product - 
+                      {/* {document.getElementById("productName")} */}
                     </h5>
                     <h5 className="card-title">
-                      Retailer - {document.getElementById("retailer")}
+                      Retailer - 
+                      {/* {document.getElementById("retailer")} */}
                     </h5>
-                    <h5 className="card-title">Date Uploaded - {new Date()}</h5>
+                    <h5 className="card-title">Date Uploaded - 
+                    {/* {new Date()} */}
+                    </h5>
                     <button
                       className="btn d-block w-100"
                       type="submit"
