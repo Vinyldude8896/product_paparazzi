@@ -38,7 +38,7 @@ const resolvers = {
   },
 
   Mutation: {
-    fileUpload: async (parent, {file}, product, retailer, context) => {
+    fileUpload: async (parent, {file, retailer, product}, context) => {
       try {
       if (context.user) {
         console.log(
@@ -47,10 +47,8 @@ const resolvers = {
           "user uploading the photo",
           context.user
         );
-        const { createReadStream, filename, productname, retailername, mimetype, encoding} =
+        const { createReadStream, filename, mimetype, encoding} =
           await file;
-          await product;
-          await retailer;
 
         //   await Photo.create({
         //     photoText: filename,
@@ -60,8 +58,8 @@ const resolvers = {
 
           await Candid.create({
             image: filename,
-            productName: productname,
-            retailer: retailername,
+            productName: product,
+            retailer: retailer,
             // productName: "Miso Soup",
             // retailer: "Walmart",
             username: context.user.username,
