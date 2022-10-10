@@ -31,6 +31,8 @@ const typeDefs = gql`
     image: String!
     productName: String!
     retailer: ID!
+    username: String!
+    createdAt: String!
   }
   
   type Query {
@@ -38,6 +40,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     retailers: [Retailer]
+    candids(username: String!): [Candid]
   }
   type Mutation {
     fileUpload(file: Upload!, retailer: String!, product: String!): File!

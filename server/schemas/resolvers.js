@@ -34,6 +34,11 @@ const resolvers = {
     retailers: async () => {
       const retailers = await Retailer.find({});
       return retailers;
+    },
+    candids: async (parent, { username }) => {
+      console.log(username);
+      const candids = await Candid.find({username: username});
+      return candids;
     }
   },
 
