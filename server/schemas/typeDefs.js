@@ -40,7 +40,7 @@ const typeDefs = gql`
     retailers: [Retailer]
   }
   type Mutation {
-    fileUpload(file: Upload!): File!
+    fileUpload(file: Upload!, retailer: String!, product: String!): File!
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addFriend(friendId: ID!): User

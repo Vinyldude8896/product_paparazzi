@@ -92,15 +92,6 @@ const UploadCandidForm = () => {
               <option value="Wholefoods">Wholefoods</option>
               <option value="Fortinos">Fortinos</option>
             </select>
-            {/* <button
-              className="btn d-block w-100"
-              type="submit"
-              onClick={() => {
-                document.getElementById("upload").click();
-              }}
-            >
-              Submit
-            </button> */}
             {files.length > 0 && src.length > 0 && (
               <div className="flex flex-wrap card z-10">
                 <div className="w-full text-center pr-5 md:p-2 z-10">
@@ -118,7 +109,6 @@ const UploadCandidForm = () => {
                     </h5>
                     <h5 className="card-title">
                       Retailer - {retailer}
-                      {/* {document.getElementById("retailer")} */}
                     </h5>
                     <button
                       className="btn d-block w-100"
