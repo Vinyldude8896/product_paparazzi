@@ -1,3 +1,4 @@
+const stripe = require("stripe")("sk_test_Hrs6SAopgFPF0bZXSN3f6ELN");
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
@@ -26,7 +27,6 @@ if (process.env.NODE_ENV === "production") {
 	});
 }
 
-
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
 	await server.start();
@@ -41,6 +41,34 @@ const startApolloServer = async (typeDefs, resolvers) => {
 		});
 	});
 };
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// This is a public sample test API key.
+// Don’t submit any personally identifiable information in requests made with this key.
+// Sign in to see your own test API key embedded in code samples.
+
+const YOUR_DOMAIN = "http://localhost:3000";
+
+app.post("/create-checkout-session", async (req, res) => {
+	const session = await stripe.checkout.sessions.create({
+		line_items: [
+			{
+				// Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+				price: "{{PRICE_ID}}",
+				quantity: 1,
+			},
+		],
+		mode: "payment",
+		success_url: `${YOUR_DOMAIN}?success=true`,
+		cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+	});
+
+	res.redirect(303, session.url);
+});
+
+app.listen(3000, () => console.log("Running on port 3000"));
+
+////////////////////
 
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);

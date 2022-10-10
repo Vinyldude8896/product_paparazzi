@@ -18,7 +18,10 @@
   },
   "dependencies": {
     "@shopify/shopify-api": "^5.2.0",
+    "@stripe/react-stripe-js": "^1.12.0",
+    "@stripe/stripe-js": "^1.38.1",
     "node": "^16.15.1",
-    "nvm": "^0.0.4"
+    "nvm": "^0.0.4",
+    "stripe": "^10.13.0"
   }
 }
