@@ -111,7 +111,7 @@ const Profile = (props) => {
                 {productName}  ,
                 Date updated {dateUploaded} </p>
               <img
-                src={shelfImage}
+                src={`${process.env.SERVER_URL}/candid-photos/Alex-Savov.jpg`}
                 alt={retailer}
                 className="shelfImage"
               />

@@ -25,13 +25,11 @@ const UploadCandidForm = () => {
 
   function setProductName(event) {
     const product = document.getElementById("productName").value
-    console.log("Product to be added", product )
     setProduct(product);
   }
 
   function setRetailerName(event) {
     const retailer = document.getElementById("retailer").value
-    console.log("retailer to be added", retailer )
     setRetailer(retailer);
   }
 
@@ -105,10 +103,10 @@ const UploadCandidForm = () => {
                   <img
                     src={src}
                     className="card-img-top card-image"
-                    alt="uploaded image"
+                    alt="uploaded candid"
                     width="400px"
                     height={"auto"}
-                  ></img>
+                  />
                   <div className="card-body">
                     <h5 className="card-title">
                       Product - 
