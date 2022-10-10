@@ -35,6 +35,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
 	server.applyMiddleware({ app });
 
 	db.once("open", () => {
+		if (!require("fs").existsSync("./Photos")) { require("fs").mkdirSync("Photos")}
 		app.listen(PORT, () => {
 			console.log(`API server running on port ${PORT}!`);
 			console.log(
