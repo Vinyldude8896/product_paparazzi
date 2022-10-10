@@ -51,8 +51,8 @@ export const REMOVE_CANDID = gql`
 `;
 
 export const UPLOAD_FILE = gql`
-    mutation FileUpload($file: Upload!) {
-        fileUpload(file: $file) {
+    mutation FileUpload($file: Upload!, $retailer: String!, $product: String!) {
+        fileUpload(file: $file, retailer: $retailer, product: $product) {
             filename
             mimetype
             encoding

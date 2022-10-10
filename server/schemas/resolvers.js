@@ -38,7 +38,8 @@ const resolvers = {
   },
 
   Mutation: {
-    fileUpload: async (parent, {file}, context) => {
+    fileUpload: async (parent, {file, retailer, product}, context) => {
+      console.log("Args passed are " + file, retailer, product)
       try {
       if (context.user) {
         console.log(
@@ -50,18 +51,13 @@ const resolvers = {
         const { createReadStream, filename, mimetype, encoding} =
           await file;
 
-        //   await Photo.create({
-        //     photoText: filename,
-        //     location: "some photo location",
-        //     user_id: context.user._id,
-        // });
-
           await Candid.create({
             image: filename,
-            productName: "Miso Soup",
-            retailer: "Walmart",
+            productName: product,
+            retailer: retailer,
             username: context.user.username,
-          });
+          }
+          ), console.log(Candid);
 
           // Invoking the 'CreateReadStream' will return a readable Stream,
           const stream = createReadStream();

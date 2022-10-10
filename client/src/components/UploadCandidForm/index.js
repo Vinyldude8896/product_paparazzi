@@ -34,13 +34,15 @@ const UploadCandidForm = () => {
   }
 
   function fileUpload(submitEvent) {
-    console.log("adding this file to storage" + files[0])
+    console.log("variables are " + files + " " + retailer + " " + product)
     submitEvent.preventDefault();
     (async () => {
       try {
         await fileUploadMutation({
           variables: {
             file: files[0],
+            retailer: retailer,
+            product: product
           },
         });
         setFiles([]);
@@ -86,17 +88,8 @@ const UploadCandidForm = () => {
               <option value="Sobeys">Sobeys</option>
               <option value="Metro">Metro</option>
               <option value="Wholefoods">Wholefoods</option>
-              <option value="Wholefoods">Fortinos</option>
+              <option value="Fortinos">Fortinos</option>
             </select>
-            {/* <button
-              className="btn d-block w-100"
-              type="submit"
-              onClick={() => {
-                document.getElementById("upload").click();
-              }}
-            >
-              Submit
-            </button> */}
             {files.length > 0 && src.length > 0 && (
               <div className="flex flex-wrap card z-10">
                 <div className="w-full text-center pr-5 md:p-2 z-10">
@@ -114,10 +107,6 @@ const UploadCandidForm = () => {
                     </h5>
                     <h5 className="card-title">
                       Retailer - {retailer}
-                      {/* {document.getElementById("retailer")} */}
-                    </h5>
-                    <h5 className="card-title">Date Uploaded - 
-                    {/* {new Date()} */}
                     </h5>
                     <button
                       className="btn d-block w-100"
