@@ -1,7 +1,8 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Order, Product } = require("../models");
 const { signToken } = require("../utils/auth");
-const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+require ("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const resolvers = {
 	Query: {
@@ -25,6 +26,10 @@ const resolvers = {
 		retailers: async () => {
 			const retailers = await Retailer.find({});
 			return retailers;
+		},
+    products: async () => {
+			const products = await Product.find({});
+			return products;
 		},
 	},
 
@@ -73,48 +78,47 @@ const resolvers = {
 			});
 			return newCandid;
 		},
-	},
-	checkout: async (parent, args, context) => {
-		const url = "https://localhost:3001";
-			const order = new Order({ products: args.products });
-      // const order = new Order({ });
-			const { products } = await order.populate("products");
-			const line_items = [];
-
-			for (let i = 0; i < products.length; i++) {
-				// generate product id
-				const product = await stripe.products.create({
-					name: products[i].name,
-					description: products[i].description,
-					images: [`${url}/images/${products[i].image}`],
-          // name: "Subscription",
-          // description: "Intro subscription",
-				});
-
-				// generate price id using the product id
-				const price = await stripe.prices.create({
-					// product: product.id,
-          product: 1,
-					// unit_amount: products[i].price * 100,
-          unit_amount: 3 * 100,
-					currency: "cad",
-				});
-
-				// add price id to the line items array
-				line_items.push({
-					price: price.id,
-					quantity: 1,
-				});
-			// }
-		const session = await stripe.checkout.sessions.create({
-			payment_method_types: ["card"],
-			line_items,
-			mode: "payment",
-			success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${url}/`,
-		});
-
-		return { session: session.id };
+    checkout: async (parent, args, context) => {
+      const url = new URL(context.headers.referer).origin;
+       console.log("this is args", args)
+      const productsPromises = args.products.map(ID => {
+        return Product.find({_id: ID})
+      })
+      const products = (await Promise.all(productsPromises)).flat()
+      console.log (products);
+        const line_items = [];
+      
+        for (let i = 0; i < products.length; i++) {
+          // generate product id
+          const product = await stripe.products.create({
+            name: products[i].name,
+            description: products[i].description,
+            // images: [`${url}/images/${products[i].image}`],
+          });
+  
+          // generate price id using the product id
+          const price = await stripe.prices.create({
+            product: product.id,
+            unit_amount: products[i].price * 100,
+            currency: "cad",
+          });
+  
+          // add price id to the line items array
+          line_items.push({
+            price: price.id,
+            quantity: 1,
+          });
+        }
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items,
+        mode: "payment",
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`,
+      });
+  
+      return { session: session.id };
+    }
 	},
 };
 

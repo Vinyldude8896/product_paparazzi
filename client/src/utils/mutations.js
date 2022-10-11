@@ -63,10 +63,15 @@ export const ADD_ORDER = gql`
         description
         price
         quantity
-        category {
-          name
-        }
+
       }
     }
   }
 `;
+
+export const CHECKOUT = gql`
+mutation checkout($products: [ID]!) {
+  checkout(products: $products) {
+    session
+  }
+}`

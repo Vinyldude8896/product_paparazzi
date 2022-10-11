@@ -62,9 +62,6 @@ export const QUERY_ALL_PRODUCTS = gql`
       description
       price
       quantity
-      category {
-        name
-      }
     }
   }
 `;
