@@ -18,9 +18,7 @@
   },
   "dependencies": {
     "@shopify/shopify-api": "^5.2.0",
-    "bootstrap": "^5.2.2",
     "node": "^16.15.1",
-    "nvm": "^0.0.4",
-    "react-bootstrap": "^2.5.0"
+    "nvm": "^0.0.4"
   }
 }
