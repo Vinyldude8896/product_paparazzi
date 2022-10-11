@@ -22,6 +22,7 @@ const Header = () => {
 						<>
 							<Link to="/upload-candid">Upload Candid</Link>
 							<Link to="/Incentives">My Incentives</Link>
+							<Link to="/Subscription">Subscription</Link>
 							<Link to="/profile">My Candids</Link>
 							<span className="line">|</span>
 							<a href="/" onClick={logout}>
