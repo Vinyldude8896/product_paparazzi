@@ -63,6 +63,8 @@ query candids($username: String!) {
   }
 }`
 
+
+
 export const QUERY_CANDID = gql `
 query candid($id: ID!) {
   candid(_id: $id) {

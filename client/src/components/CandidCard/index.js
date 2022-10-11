@@ -1,7 +1,9 @@
 import React from "react";
 import { SERVER_URL } from "../../utils/vars";
 
-const CandidList = ({ candids, title}) => {
+
+const CandidCard = ({candids , title}) => {
+
 
     console.log("Data passed into candids list is " , candids)
     if (!candids.length) {
@@ -36,4 +38,4 @@ const CandidList = ({ candids, title}) => {
   );
 }
 
-export default CandidList;
+export default CandidCard;
