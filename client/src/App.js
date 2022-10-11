@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
+	ApolloClient,
+	InMemoryCache,
+	ApolloProvider,
+	createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
@@ -12,15 +12,17 @@ import { createUploadLink } from "apollo-upload-client";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-
-import Home from './pages/Home';
-import Login from './pages/Login';
-import NoMatch from './pages/NoMatch';
-import Profile from './pages/Profile';
-import Signup from './pages/Signup';
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import NoMatch from "./pages/NoMatch";
+import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
 import Incentives from "./pages/Incentives";
 import UploadCandid from './pages/UploadCandid';
 import ProtectedRoute from "./components/ProtectedRoute";
+import Subscription from "./pages/Subscription";
+import HowItWorks from "./pages/HowItWorks";
+import Contact from "./pages/Contact";
 
 
 const httpLink = createHttpLink({
@@ -106,67 +108,22 @@ function App() {
                 path="*" 
                 element={<NoMatch />} 
               />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
-      </Router>
-    </ApolloProvider>
+            <Route path="/Subscription" element={<Subscription />} />
+							<Route path="/HowItWorks" element={<HowItWorks />} />
+							<Route path="/Contact" element={<Contact />} />
+							<Route path="*" element={<NoMatch />} />
+				</Routes>
+					</div>
+					<Footer />
+				</div>		
+			</Router>
+		</ApolloProvider>
   );
-}
+	// link: authLink.concat(httpLink),
+	// cache: new InMemoryCache(),
+};
 
-/////////////////////////////////////////////////////////////////
 
-// const SubscriptionDisplay = () => (
-//   <section>
-//     <div className="subscription">
-//       <img
-//         src="https://i.imgur.com/EHyR2nP.png"
-//         alt="The cover of Stubborn Attachments"
-//       />
-//       <div className="description">
-//       <h3>Monthly Subscription</h3>
-//       <h5>$3.00</h5>
-//       </div>
-//     </div>
-//     <form action="/create-checkout-session" method="POST">
-//       <button type="submit">
-//         Checkout
-//       </button>
-//     </form>
-//   </section>
-// );
-
-// const Message = ({ message }) => (
-//   <section>
-//     <p>{message}</p>
-//   </section>
-// );
-
-// export default function App() {
-//   const [message, setMessage] = useState("");
-
-//   useEffect(() => {
-//     // Check to see if this is a redirect back from Checkout
-//     const query = new URLSearchParams(window.location.search);
-
-//     if (query.get("success")) {
-//       setMessage("Order placed! You will receive an email confirmation.");
-//     }
-
-//     if (query.get("cancelled")) {
-//       setMessage(
-//         "Order cancelled -- continue to shop around and checkout when you're ready."
-//       );
-//     }
-//   }, []);
-
-//   return message ? (
-//     <Message message={message} />
-//   ) : (
-//     <ProductDisplay />
-//   );
-// }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
