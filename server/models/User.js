@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const Order = require('./Order');
+
 
 const userSchema = new Schema(
   {
@@ -20,18 +22,13 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    photos: [
+    candids: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Photo'
+        ref: 'Candid'
       }
     ],
-    friends: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-      }
-    ]
+    orders: [Order.schema]
   },
   {
     toJSON: {
