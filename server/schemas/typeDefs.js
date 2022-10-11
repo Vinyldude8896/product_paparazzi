@@ -31,7 +31,6 @@ const typeDefs = gql`
     _id: ID!
     image: String!
     productName: String!
-    image: String!
     retailer: ID!
     username: String!
     createdAt: String!

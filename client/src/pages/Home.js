@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Auth from "../utils/auth";
 import { useQuery, useLazyQuery } from "@apollo/client";
 import { QUERY_ME_BASIC , QUERY_CANDIDS} from "../utils/queries";
-import CandidList from "../components/CandidCard";
+import CandidUploads from "../components/CandidCard";
 import BackgroundImage from "../images/shopcartaisle.jpeg";
 
 const Home = () => {
@@ -28,11 +28,11 @@ const Home = () => {
               <span className="card-title text-dark">Current Candids </span>
             </h1>
           </div>
-              {CandidUploads.map(x =>{
+              {/* {CandidUploads.map(x =>{
              return (
                <PictureCard key={x.key} image={x.image} productName={x.productName} retailer={x.retailer} dateUploaded={x.dateUploaded}></PictureCard>
              )
-              })}
+              })} */}
           </section>
 				)}
 				<div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
