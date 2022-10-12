@@ -40,6 +40,10 @@ const typeDefs = gql`
     ok: Boolean!
   }
   
+  type UpdateResponse {
+    ok: Boolean!
+  }
+  
   type Product {
     _id: ID
     name: String
@@ -66,6 +70,7 @@ const typeDefs = gql`
     product(_id: ID!): Product
     products: [Product]
     retailers: [Retailer]
+    candid(_id: ID!): Candid
     myCandids(username: String!): [Candid]
     allCandids: [Candid]
     order(_id: ID!): Order
@@ -79,6 +84,7 @@ const typeDefs = gql`
     addOrder(products: [ID]!): Order
     addFriend(friendId: ID!): User
     removeCandid(candidId: ID!): DeleteResponse
+    updateCandid(candidId: ID!, newProductName: String!, newRetailer: String!): UpdateResponse
     addCandid(
       productName: String!
       image: String!

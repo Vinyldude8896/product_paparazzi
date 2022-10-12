@@ -20,6 +20,7 @@ import Signup from "./pages/Signup";
 import Incentives from "./pages/Incentives";
 import UploadCandid from './pages/UploadCandid';
 import ProtectedRoute from "./components/ProtectedRoute";
+import EditCandid from "./pages/EditCandid";
 import Subscription from "./pages/Subscription";
 import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
@@ -101,6 +102,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <UploadCandid />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/candid/:candidId" 
+                element={
+                  <ProtectedRoute>
+                    <EditCandid />
                   </ProtectedRoute>
                 } 
               />
