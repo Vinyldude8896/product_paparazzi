@@ -18,13 +18,12 @@ import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Incentives from "./pages/Incentives";
-import UploadCandid from './pages/UploadCandid';
+import UploadCandid from "./pages/UploadCandid";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditCandid from "./pages/EditCandid";
 import Subscription from "./pages/Subscription";
 import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
-
 
 const httpLink = createHttpLink({
 	uri:
@@ -49,90 +48,76 @@ const authLink = setContext((_, { headers }) => {
 // });
 
 const client = new ApolloClient({
-  link: authLink.concat(
-      createUploadLink({
-          headers: { "Apollo-Require-Preflight": "true" },
-          uri:
-              process.env.NODE_ENV === "development"
-                  ? "http://localhost:3001/graphql"
-                  : "/graphql",
-      })
-  ),
-  cache: new InMemoryCache(),
+	link: authLink.concat(
+		createUploadLink({
+			headers: { "Apollo-Require-Preflight": "true" },
+			uri:
+				process.env.NODE_ENV === "development"
+					? "http://localhost:3001/graphql"
+					: "/graphql",
+		})
+	),
+	cache: new InMemoryCache(),
 });
 
 function App() {
-  return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Routes>
-              <Route 
-                path="/" 
-                element={<Home />} 
-              />
-              <Route 
-                path="/login" 
-                element={<Login />} 
-              />
-              <Route 
-                path="/signup" 
-                element={<Signup />} 
-              />
-              <Route 
-                path="/profile" 
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/incentives" 
-                element={ 
-                  <ProtectedRoute>
-                    <Incentives />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/upload-candid" 
-                element={
-                  <ProtectedRoute>
-                    <UploadCandid />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/candid/:candidId" 
-                element={
-                  <ProtectedRoute>
-                    <EditCandid />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="*" 
-                element={<NoMatch />} 
-              />
-            <Route path="/Subscription" element={<Subscription />} />
+	return (
+		<ApolloProvider client={client}>
+			<Router>
+				<div className="flex-column justify-flex-start min-100-vh">
+					<Header />
+					<div className="container">
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/signup" element={<Signup />} />
+							<Route
+								path="/profile"
+								element={
+									<ProtectedRoute>
+										<Profile />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/incentives"
+								element={
+									<ProtectedRoute>
+										<Incentives />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/upload-candid"
+								element={
+									<ProtectedRoute>
+										<UploadCandid />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/candid/:candidId"
+								element={
+									<ProtectedRoute>
+										<EditCandid />
+									</ProtectedRoute>
+								}
+							/>
+							<Route path="*" element={<NoMatch />} />
+							<Route path="/Subscription" element={<Subscription />} />
 							<Route path="/HowItWorks" element={<HowItWorks />} />
 							<Route path="/Contact" element={<Contact />} />
 							<Route path="*" element={<NoMatch />} />
-				</Routes>
+						</Routes>
 					</div>
 					<Footer />
-				</div>		
+				</div>
 			</Router>
 		</ApolloProvider>
-  );
+	);
 	// link: authLink.concat(httpLink),
 	// cache: new InMemoryCache(),
-};
-
-
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

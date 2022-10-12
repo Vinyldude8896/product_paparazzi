@@ -30,7 +30,7 @@ const Header = () => {
 						</>
 					) : (
 						<>
-							<Link to="/incentive">Incentives</Link>
+							{/* <Link to="/incentive">Incentives</Link> */}
 							<Link to="/howitworks">How It Works</Link>
 							<Link to="/signup">Signup</Link>
 							<span className="line">|</span>

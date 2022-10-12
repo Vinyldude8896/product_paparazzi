@@ -49,13 +49,15 @@ const Home = () => {
 						<CandidList candids={data.allCandids} title="Current Candids" />
 					</div>
 				)}
-				<div className="col-12 mb-3 col-lg-8">
-					<div className="col-12 mb-3">
-						<div className="bg-text banner">
-							<h2>Help Your Favourite Brand and Be Rewarded</h2>
+				{!loggedIn && (
+					<div className="col-12 mb-3 col-lg-8">
+						<div className="col-12 mb-3">
+							<div className="bg-text banner">
+								<h2>Help Your Favourite Brand and Be Rewarded</h2>
+							</div>
 						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</main>
 	);
