@@ -1,38 +1,36 @@
 import React, { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+import { useQuery } from "@apollo/client";
+
 import Auth from "../utils/auth";
-import { useQuery, useLazyQuery } from "@apollo/client";
-import { QUERY_ME_BASIC , QUERY_CANDIDS} from "../utils/queries";
+import { QUERY_ALL_CANDIDS } from "../utils/queries";
 import CandidList from "../components/CandidList";
 import BackgroundImage from "../images/shopcartaisle.jpeg";
-import { useLocation } from "react-router-dom";
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_CANDIDS);
-  const { data: userData } = useQuery(QUERY_ME_BASIC);
-//   const locationKey = useLocation().key;
-//   const user = Auth.getProfile().data;
+  const location = useLocation();
 
-//   // will import out photos here
-// const [getCandids, {loading: loadingCandids, data: candidsData, error}] = useLazyQuery(QUERY_CANDIDS, {
-//   variables: { username: user.username}
-// })
+  // will import out photos here
+  const {loading, data, error, refetch} = useQuery(QUERY_ALL_CANDIDS, { fetchPolicy: 'cache-and-network'});
 
-// useEffect(() => {
-//   getCandids();
-// }, [locationKey. getCandids]);
+  // whenever visiting the page, fetch all candids
+  useEffect(() => {
+    refetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
-// if (loadingCandids || !candidsData) {
-//   return <div>Loading....</div>
-// }
+  if (loading) {
+    return <div>Loading....</div>
+  }
 
-// if (error) {
-//   return <div>Error occured</div>
-// }
+if (error) {
+  return <div>Error occured</div>
+}
 
   const loggedIn = Auth.loggedIn();
 
   return (
-    <main >
+    <main>
       <div className="col-12">
         {!loggedIn && (
           <div>
@@ -40,29 +38,22 @@ const Home = () => {
           </div>
         )}
 
-        {/* {loggedIn && (
+         {loggedIn && (
 
           <div className ="col-12 mb-3">
-          <CandidList
-          candids = {candidsData.candids}
-          title = "Current Candids"
-          />
+            <CandidList
+              candids = {data.allCandids}
+              title = "Current Candids"
+            />
           </div>
-        )} */}
-        <div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
-          {!Auth.loggedIn() ? (
-            <>
-              <div class="bg-text">
-                <h2>Help Your Favourite Brand and Be Rewarded</h2>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
+				)}
+				<div className="col-12 mb-3 col-lg-8">
+          <div className="col-12 mb-3">
+            <div className="bg-text">
+              <h2>Help Your Favourite Brand and Be Rewarded</h2>
+            </div>
+          </div>
         </div>
-        {loggedIn && userData ? (
-          <div className="col-12 col-lg-3 mb-3"></div>
-        ) : null}
       </div>
     </main>
   );

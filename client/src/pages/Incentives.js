@@ -10,7 +10,6 @@ import { ADD_COUPON } from "../utils/mutations";
 
 const couponCodes = ["023EryTHy678-0632"]
 
-
 const Profile = (props) => {
   const { username: userParam } = useParams();
   // let redeemCounter = "";
@@ -20,12 +19,12 @@ const Profile = (props) => {
   const [addCoupon] = useMutation(ADD_COUPON);
  
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
-    variablesPhotos: { photocount: useParams },
-  });
+	const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+		variables: { username: userParam },
+		variablesPhotos: { photocount: useParams },
+	});
 
-  const user = data?.me || data?.user || {};
+	const user = data?.me || data?.user || {};
 
   const [isShown, setIsShown] = useState(false);
 
@@ -57,9 +56,9 @@ const Profile = (props) => {
     return <Navigate to="/profile:username" />;
   }
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 
 
   return (
@@ -70,7 +69,8 @@ const Profile = (props) => {
             <div className="card-body">
               <h5 className="card-title ">Incentive Tier 1</h5>
               <p className="card-text">
-                Requirements: Minimum 3 candids to recieve this incentive tier.
+                Requirements: Minimum 3 points to recieve this incentive tier.
+                You get 1 point for each Candid uploaded
               </p>
               <p className="card-text">
                 Reward: with this reward you can redeem for a $5 off coupon.
@@ -87,6 +87,7 @@ const Profile = (props) => {
               <h5 className="card-title">Incentive Tier 2</h5>
               <p className="card-text">
                 Requirements: Minimum 5 candids to recieve this incentive tier.
+                You get 1 point for each Candid uploaded
               </p>
               <p className="card-text">
                 Reward: with this reward you can redeem for a $10 off coupon.
@@ -99,11 +100,12 @@ const Profile = (props) => {
         </div>
       </div>
       <div className="card mt-3 ml-5 mb-3">
-        <div className="card-header">Here is your Incentive Level</div>
+        <div className="card-header">Here is your Incentive Information</div>
         <div className="card-body">
           {/* This will use the variablesPhotos parameters */}
-          <h5 className="card-title" id="redeemCounter">You have {isShown && (5)}</h5>
-          <p className="card-text">Your Incentive Tier is currently : Tier 1</p>
+          <p className="card-text">Your Points Left after redemption </p>
+          <h5 className="card-title" id="redeemCounter">{isShown && ("You have 3 points left")}</h5>
+          
           <p>______________________________________________</p>
           <h5 className="card-title">Your previous redeemed coupon codes</h5>
           <a href={couponCodes} id="couponCode" className="text-blue card-text">{isShown && ("023EryTHy6780632")}</a>
@@ -111,6 +113,6 @@ const Profile = (props) => {
       </div>
     </section>
   );
-};
 
+}
 export default Profile;

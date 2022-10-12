@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const Order = require('./Order');
+
 
 const userSchema = new Schema(
   {
@@ -26,6 +28,7 @@ const userSchema = new Schema(
         ref: 'Candid'
       }
     ],
+    orders: [Order.schema],
     coupons: [
       {
         type: Schema.Types.ObjectId,
