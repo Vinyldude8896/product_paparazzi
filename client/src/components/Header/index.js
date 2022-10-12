@@ -16,12 +16,12 @@ const Header = () => {
         <Link to="/">
           <img className="logo" src={PaparazziLogo} alt="camera with logo" />
         </Link>
-
         <nav className="text-center">
           {Auth.loggedIn() ? (
             <>
               <Link to="/upload-candid">Upload Candid</Link>
-              <Link to="/incentives">My Incentives</Link>
+              <Link to="/Incentives">My Incentives</Link>
+              <Link to="/Subscription">Subscription</Link>
               <Link to="/profile">My Candids</Link>
               <span className="line">|</span>
               <a href="/" onClick={logout}>
@@ -30,7 +30,8 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link to="/how-it-works">How It Works</Link>
+              <Link to="/incentive">Incentives</Link>
+              <Link to="/howitworks">How It Works</Link>
               <Link to="/signup">Signup</Link>
               <span className="line">|</span>
               <Link to="/login">Login</Link>
