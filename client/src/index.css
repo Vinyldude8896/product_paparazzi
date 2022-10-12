@@ -18,24 +18,24 @@
 	box-sizing: border-box;
 }
 
+.mainBox {
+	margin-right: 0;
+	padding-right: 0;
+}
+
 .myBackgroundImage {
 	width: 1450px;
 	height: 500px;
 }
 
-/* .Intro {
-	text-align: center;
-	font-size: xx-large;
-	font-weight: 900;
-	text-shadow: 0 0 10px #e1f5f4;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-} */
-
 .logo {
 	margin-left: 40px;
 	width: 250px;
 	height: 175px;
+}
+
+.banner {
+	margin-top: 125px;
 }
 
 .contact {
@@ -56,25 +56,27 @@ body {
 	color: white;
 }
 
-.works {
-	z-index: 2;
-	position: absolute;
-}
-
 .worksBackgroundImage {
 	width: 100%;
-	min-height: 75vh;
+	min-height: 50%;
 	position: relative;
 	top: 0;
 	left: 0;
+	right: 0;
 }
-
-.howTitle {
-	text-align: center;
-}
-
 .howBody {
 	width: 50vh;
+	position: absolute;
+	top: 250px;
+	left: 90px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 1;
+}
+
+.howTitle,
+.howParagraph {
+	text-align: center;
 }
 
 body {
