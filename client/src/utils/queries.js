@@ -74,3 +74,13 @@ query candid($id: ID!) {
     username
   }
 }`
+
+export const QUERY_COUPONS = gql`
+query coupons($username: String!) {
+	coupons(username: $username) {
+		_id
+		couponText
+		redeemCounter
+		username
+	}
+}`

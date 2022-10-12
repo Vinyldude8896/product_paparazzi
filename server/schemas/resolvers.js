@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Candid, Photo } = require('../models');
+const { User, Candid} = require('../models');
+const { Coupon } = require('../models');
 const { signToken } = require('../utils/auth');
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const { finished } = require('stream/promises');
@@ -39,6 +40,11 @@ const resolvers = {
       console.log(username);
       const candids = await Candid.find({username: username});
       return candids;
+    },
+    coupons: async (parent, { username }) => {
+      console.log(username);
+      const coupons = await Coupon.find({username: username});
+      return coupons;
     }
   },
 
@@ -121,6 +127,10 @@ const resolvers = {
     addCandid: async (productName, image, retailerId, userId) => {
       const newCandid = await Candid.create({productName, image, retailerId, userId});
       return newCandid;
+    },
+    addCoupon: async (couponText, redeemCounter, username) => {
+      const newCoupon = await Coupon.create({couponText, redeemCounter, username});
+      return newCoupon;
     }
   }
 };

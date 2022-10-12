@@ -50,6 +50,15 @@ export const REMOVE_CANDID = gql`
   }
 `;
 
+export const ADD_COUPON = gql `
+mutation addCoupon($couponText: String!, $redeemCounter: String!) {
+ addCoupon(couponText: $couponText, redeemCounter: $redeemCounter){
+  _id
+  couponText
+  redeemCounter
+ }
+}`
+
 export const UPLOAD_FILE = gql`
     mutation FileUpload($file: Upload!, $retailer: String!, $product: String!) {
         fileUpload(file: $file, retailer: $retailer, product: $product) {

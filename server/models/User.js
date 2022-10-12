@@ -26,6 +26,12 @@ const userSchema = new Schema(
         ref: 'Candid'
       }
     ],
+    coupons: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Coupon'
+      }
+    ]
   },
   {
     toJSON: {
@@ -49,8 +55,8 @@ userSchema.methods.isCorrectPassword = async function(password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('friendCount').get(function() {
-  return this.friends.length;
+userSchema.virtual('candidCount').get(function() {
+  return this.candids.length;
 });
 
 const User = model('User', userSchema);

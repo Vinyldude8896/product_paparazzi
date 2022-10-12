@@ -7,6 +7,7 @@ const typeDefs = gql`
     email: String
     candidCount: Int
     candids: [Candid]
+    coupons: [Coupon]
   }
   type Auth {
     token: ID!
@@ -34,6 +35,13 @@ const typeDefs = gql`
     username: String!
     createdAt: String!
   }
+
+  type Coupon {
+    _id: ID!
+    couponText: String!
+    redeemCounter: String!
+    username: String!
+  }
   
   type Query {
     me: User
@@ -41,6 +49,7 @@ const typeDefs = gql`
     user(username: String!): User
     retailers: [Retailer]
     candids(username: String!): [Candid]
+    coupons(username: String!): [Coupon]
   }
   type Mutation {
     fileUpload(file: Upload!, retailer: String!, product: String!): File!
@@ -48,6 +57,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     addFriend(friendId: ID!): User
     addCandid(image: String!, productName: String!, retailer: String!, username: String!): Candid
+    addCoupon(couponText: String!, redeemCounter: String!, username: String!) : Coupon
   }
 `;
 

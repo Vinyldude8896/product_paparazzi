@@ -9,25 +9,25 @@ import { useLocation } from "react-router-dom";
 const Home = () => {
   const { loading, data } = useQuery(QUERY_CANDIDS);
   const { data: userData } = useQuery(QUERY_ME_BASIC);
-  const locationKey = useLocation().key;
-  const user = Auth.getProfile().data;
+//   const locationKey = useLocation().key;
+//   const user = Auth.getProfile().data;
 
-  // will import out photos here
-const [getCandids, {loading: loadingCandids, data: candidsData, error}] = useLazyQuery(QUERY_CANDIDS, {
-  variables: { username: user.username}
-})
+//   // will import out photos here
+// const [getCandids, {loading: loadingCandids, data: candidsData, error}] = useLazyQuery(QUERY_CANDIDS, {
+//   variables: { username: user.username}
+// })
 
-useEffect(() => {
-  getCandids();
-}, [locationKey. getCandids]);
+// useEffect(() => {
+//   getCandids();
+// }, [locationKey. getCandids]);
 
-if (loadingCandids || !candidsData) {
-  return <div>Loading....</div>
-}
+// if (loadingCandids || !candidsData) {
+//   return <div>Loading....</div>
+// }
 
-if (error) {
-  return <div>Error occured</div>
-}
+// if (error) {
+//   return <div>Error occured</div>
+// }
 
   const loggedIn = Auth.loggedIn();
 
@@ -40,7 +40,7 @@ if (error) {
           </div>
         )}
 
-        {loggedIn && (
+        {/* {loggedIn && (
 
           <div className ="col-12 mb-3">
           <CandidList
@@ -48,7 +48,7 @@ if (error) {
           title = "Current Candids"
           />
           </div>
-        )}
+        )} */}
         <div className={`col-12 mb-3 ${loggedIn && "col-lg-8"}`}>
           {!Auth.loggedIn() ? (
             <>
