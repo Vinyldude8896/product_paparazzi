@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Candid, Photo, Order, Product } = require("../models");
+const { User, Candid, Photo, Order, Product, Coupon } = require("../models");
 const { signToken } = require("../utils/auth");
 require ("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_KEY);
@@ -37,15 +37,27 @@ const resolvers = {
 			const retailers = await Retailer.find({});
 			return retailers;
     },
-    candids: async (parent, { username }) => {
-      console.log(username);
-      const candids = await Candid.find({username: username});
-      return candids;
-		},
+    candid: async (parent, { _id }) => {
+      const candid = await Candid.findById(_id);
+      return candid;
+    },
+    myCandids: async (parent, { username }) => {
+      const myCandids = await Candid.find({username: username}); // filter candids by username
+      return myCandids;
+    },
+    allCandids: async (parent, {}) => {
+      const allCandids = await Candid.find({}); // find all candids
+      return allCandids;
+    },
     products: async () => {
 			const products = await Product.find({});
 			return products;
 		},
+    coupons: async (parent, { username }) => {
+      console.log(username);
+      const coupons = await Coupon.find({username: username});
+      return coupons;
+    }
 	},
 
   Mutation: {
@@ -121,18 +133,34 @@ const resolvers = {
 
 				return updatedUser;
 			}
-
-			throw new AuthenticationError("You need to be logged in!");
-		},
-		addCandid: async (productName, image, retailerId, userId) => {
+    },
+    addCandid: async (productName, image, retailer, username) => {
 			const newCandid = await Candid.create({
 				productName,
 				image,
-				retailerId,
-				userId,
+				retailer,
+				username,
 			});
 			return newCandid;
 		},
+    removeCandid: async (parent, { candidId }) => {
+      const deletedCandid = await Candid.findByIdAndDelete(candidId);
+      if (deletedCandid) {
+        return { ok: true };
+      }
+      return { ok: false };
+    },
+    updateCandid: async (parent, {candidId, newProductName, newRetailer}) => {
+      const updatedCandid = await Candid.findByIdAndUpdate(candidId, {productName: newProductName, retailer: newRetailer});
+      if (updatedCandid) {
+        return { ok: true };
+      }
+      return { ok: false };
+		},
+    addCoupon: async (couponText, redeemCounter, username) => {
+      const newCoupon = await Coupon.create({couponText, redeemCounter, username});
+      return newCoupon;
+    },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
        console.log("this is args", args)

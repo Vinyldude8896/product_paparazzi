@@ -8,6 +8,7 @@ const typeDefs = gql`
     orders: [Order]
     candidCount: Int
     candids: [Candid]
+    coupons: [Coupon]
   }
   type Auth {
     token: ID!
@@ -36,6 +37,21 @@ const typeDefs = gql`
     createdAt: String!
   }
 
+  type Coupon {
+    _id: ID!
+    couponText: String!
+    redeemCounter: String!
+    username: String!
+  }
+
+  type DeleteResponse {
+    ok: Boolean!
+  }
+  
+  type UpdateResponse {
+    ok: Boolean!
+  }
+  
   type Product {
     _id: ID
     name: String
@@ -62,9 +78,12 @@ const typeDefs = gql`
     product(_id: ID!): Product
     products: [Product]
     retailers: [Retailer]
+    candid(_id: ID!): Candid
+    myCandids(username: String!): [Candid]
+    allCandids: [Candid]
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    candids(username: String!): [Candid]
+    coupons(username: String!): [Coupon]
   }
 
   type Mutation {
@@ -73,13 +92,16 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     addOrder(products: [ID]!): Order
     addFriend(friendId: ID!): User
+    removeCandid(candidId: ID!): DeleteResponse
+    updateCandid(candidId: ID!, newProductName: String!, newRetailer: String!): UpdateResponse
     addCandid(
       productName: String!
       image: String!
-      retailerId: ID!
-      userId: ID!
+      retailer: String!
+      username: String!
     ): Candid
     checkout(products: [ID]!): Checkout
+    addCoupon(couponText: String!, redeemCounter: String!, username: String!) : Coupon
   }
 `;
 
