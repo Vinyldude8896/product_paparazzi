@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Candid, Photo, Order, Product } = require("../models");
+const { User, Candid, Photo, Order, Product, Coupon } = require("../models");
 const { signToken } = require("../utils/auth");
 require ("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_KEY);
@@ -53,6 +53,11 @@ const resolvers = {
 			const products = await Product.find({});
 			return products;
 		},
+    coupons: async (parent, { username }) => {
+      console.log(username);
+      const coupons = await Coupon.find({username: username});
+      return coupons;
+    }
 	},
 
   Mutation: {
@@ -152,6 +157,10 @@ const resolvers = {
       }
       return { ok: false };
 		},
+    addCoupon: async (couponText, redeemCounter, username) => {
+      const newCoupon = await Coupon.create({couponText, redeemCounter, username});
+      return newCoupon;
+    },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
        console.log("this is args", args)

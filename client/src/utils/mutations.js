@@ -27,7 +27,7 @@ export const ADD_USER = gql`
 
 export const ADD_CANDID = gql`
   mutation addCandid($image: String!, $productName: String!, $retailer: String!, $username: String!) {
-    addCandid(image: $image, procutName: $productName, retailer: $retailer, username: $username) {
+    addCandid(image: $image, productName: $productName, retailer: $retailer, username: $username) {
       _id
       image
       productName
@@ -53,6 +53,15 @@ mutation UpdateCandid($candidId: ID!, $newProductName: String!, $newRetailer: St
   }
 }
 `
+
+export const ADD_COUPON = gql `
+mutation addCoupon($couponText: String!, $redeemCounter: String!) {
+ addCoupon(couponText: $couponText, redeemCounter: $redeemCounter){
+  _id
+  couponText
+  redeemCounter
+ }
+}`
 
 export const UPLOAD_FILE = gql`
     mutation FileUpload($file: Upload!, $retailer: String!, $product: String!) {

@@ -106,3 +106,13 @@ export const QUERY_ALL_PRODUCTS = gql`
     }
   }
 `;
+
+export const QUERY_COUPONS = gql`
+query coupons($username: String!) {
+	coupons(username: $username) {
+		_id
+		couponText
+		redeemCounter
+		username
+	}
+}`

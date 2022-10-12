@@ -23,9 +23,9 @@ const Home = () => {
     return <div>Loading....</div>
   }
 
-  if (error) {
-    return <div>Error occured</div>
-  }
+if (error) {
+  return <div>Error occured</div>
+}
 
   const loggedIn = Auth.loggedIn();
 
@@ -38,7 +38,7 @@ const Home = () => {
           </div>
         )}
 
-        {loggedIn && (
+         {loggedIn && (
 
           <div className ="col-12 mb-3">
             <CandidList
