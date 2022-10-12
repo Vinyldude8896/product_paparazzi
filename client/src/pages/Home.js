@@ -47,6 +47,7 @@ if (error) {
             />
           </div>
 				)}
+        {!loggedIn && (
 				<div className="col-12 mb-3 col-lg-8">
           <div className="col-12 mb-3">
             <div className="bg-text">
@@ -54,6 +55,7 @@ if (error) {
             </div>
           </div>
         </div>
+           )}
       </div>
     </main>
   );
