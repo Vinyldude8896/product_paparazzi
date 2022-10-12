@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
+import loginImage from "../images/loginPhoto.jpg";
 
 import Auth from "../utils/auth";
 
@@ -40,11 +41,17 @@ const Login = (props) => {
 	};
 
 	return (
-		<main className="flex-row justify-center mb-4">
-			<div className="col-12 col-md-6">
-				<div className="card">
+		<main>
+			<div>
+				<img
+					className="worksBackgroundImage"
+					src={loginImage}
+					alt="computer and phone on white"
+				/>
+
+				<div className="card loginBody">
 					<h4 className="card-header">Login</h4>
-					<div className="card-body">
+					<div className="card-body loginForm">
 						<form onSubmit={handleFormSubmit}>
 							<input
 								className="form-input"

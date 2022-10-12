@@ -23,18 +23,32 @@
 	height: 500px;
 }
 
-/* .Intro {
-	text-align: center;
-	font-size: xx-large;
-	font-weight: 900;
-	text-shadow: 0 0 10px #e1f5f4;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-} */
-
 .logo {
-	width: 300px;
-	height: 200px;
+	margin-left: 40px;
+	width: 250px;
+	height: 175px;
+}
+
+.banner {
+	margin-top: 125px;
+}
+
+.loginForm {
+	width: 500px;
+}
+
+.loginBody {
+	width: 50vh;
+	position: absolute;
+	top: 250px;
+	left: 400px;
+	margin-right: auto;
+	z-index: 1;
+}
+
+.signBody,
+.subBody {
+	margin-top: 30px;
 }
 
 .contact {
@@ -44,6 +58,7 @@
 .foot {
 	font-size: small;
 	text-align: end;
+	z-index: 999;
 }
 
 html,
@@ -53,6 +68,34 @@ body {
 
 .line {
 	color: white;
+}
+
+.worksBackgroundImage {
+	width: 100%;
+	min-height: 75vh;
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+.howBody {
+	width: 50vh;
+	position: absolute;
+	top: 250px;
+	left: 90px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 1;
+}
+
+.howTitle,
+.howParagraph {
+	text-align: center;
+}
+
+.website {
+	margin-top: 30px;
 }
 
 body {
@@ -185,12 +228,13 @@ nav a:hover {
 	background-color: var(--light);
 	color: var(--dark);
 }
-.block{
-	height:30px;
-	width:36px;
+.block {
+	height: 30px;
+	width: 36px;
 	margin-right: 55px;
 	margin-bottom: 55px;
-	position:relative}
+	position: relative;
+}
 
 .card-header {
 	color: var(--secondary);
@@ -205,25 +249,24 @@ nav a:hover {
 	font-size: 1.4rem;
 }
 .card-image {
-		width: 400px;
-		height: 400px;
-		border-radius:10px;
-		cursor:pointer;
-		/* object-fit:fill */
-	}
+	width: 400px;
+	height: 400px;
+	border-radius: 10px;
+	cursor: pointer;
+	/* object-fit:fill */
+}
 
 .card-title {
-		font-family: "Raleway", sans-serif;
-		font-size: 25px;
-		font-weight: bolder;
-		margin: 5px 0;
-		line-height: 1.25;
+	font-family: "Raleway", sans-serif;
+	font-size: 25px;
+	font-weight: bolder;
+	margin: 5px 0;
+	line-height: 1.25;
 }
 
 .card-container {
 	display: flex;
 	flex-wrap: wrap;
-
 }
 /* FORM */
 .form-label,
@@ -302,18 +345,8 @@ nav a:hover {
 
 /* LAYOUT */
 .container {
-	object-fit: cover;
 	width: 100%;
-	max-width: 1200px;
 }
-
-
-/* margin-left: auto;
-	margin-right: auto; */
-
-/* .container-fluid {
-	width: 100%;
-} */
 
 /* DISPLAY */
 .display-none {
@@ -1360,21 +1393,21 @@ nav a:hover {
 	text-align: center;
 }
 
-.pictureBox{
+.pictureBox {
 	display: flex;
-	flex-wrap:wrap;
+	flex-wrap: wrap;
 	column-gap: 20px;
 	border-color: white;
 }
 
-.retailerLogo{
+.retailerLogo {
 	width: 50px;
-	height:50px;
+	height: 50px;
 }
 
-.shelfImage{
+.shelfImage {
 	width: 300px;
-	height:300px;
+	height: 300px;
 	margin: 10px;
 }
 
@@ -1389,5 +1422,3 @@ nav a:hover {
 	color: white;
 	border-radius: 50%;
 }
-
-
