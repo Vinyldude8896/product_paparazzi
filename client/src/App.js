@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
 	ApolloClient,
@@ -19,6 +19,8 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Incentives from "./pages/Incentives";
 import UploadCandid from "./pages/UploadCandid";
+import ProtectedRoute from "./components/ProtectedRoute";
+import EditCandid from "./pages/EditCandid";
 import Subscription from "./pages/Subscription";
 import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
@@ -41,7 +43,15 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-	link: authLink.concat(httpLink),
+	link: authLink.concat(
+		createUploadLink({
+			headers: { "Apollo-Require-Preflight": "true" },
+			uri:
+				process.env.NODE_ENV === "development"
+					? "http://localhost:3001/graphql"
+					: "/graphql",
+		})
+	),
 	cache: new InMemoryCache(),
 });
 
@@ -56,9 +66,39 @@ function App() {
 							<Route path="/" element={<Home />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/signup" element={<Signup />} />
-							<Route path="/profile" element={<Profile />} />
-							<Route path="/incentives" element={<Incentives />} />
-							<Route path="/upload-candid" element={<UploadCandid />} />
+							<Route
+								path="/profile"
+								element={
+									<ProtectedRoute>
+										<Profile />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/incentives"
+								element={
+									<ProtectedRoute>
+										<Incentives />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/upload-candid"
+								element={
+									<ProtectedRoute>
+										<UploadCandid />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/candid/:candidId"
+								element={
+									<ProtectedRoute>
+										<EditCandid />
+									</ProtectedRoute>
+								}
+							/>
+							<Route path="*" element={<NoMatch />} />
 							<Route path="/Subscription" element={<Subscription />} />
 							<Route path="/HowItWorks" element={<HowItWorks />} />
 							<Route path="/Contact" element={<Contact />} />
@@ -70,6 +110,8 @@ function App() {
 			</Router>
 		</ApolloProvider>
 	);
+	// link: authLink.concat(httpLink),
+	// cache: new InMemoryCache(),
 }
 
 export default App;

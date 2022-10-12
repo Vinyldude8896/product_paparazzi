@@ -16,7 +16,6 @@ const Header = () => {
 				<Link to="/">
 					<img className="logo" src={PaparazziLogo} alt="camera with logo" />
 				</Link>
-
 				<nav className="text-center">
 					{Auth.loggedIn() ? (
 						<>
@@ -31,7 +30,7 @@ const Header = () => {
 						</>
 					) : (
 						<>
-							<Link to="/incentive">Incentives</Link>
+							{/* <Link to="/incentive">Incentives</Link> */}
 							<Link to="/howitworks">How It Works</Link>
 							<Link to="/signup">Signup</Link>
 							<span className="line">|</span>

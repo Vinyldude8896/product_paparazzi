@@ -1,11 +1,61 @@
-import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
+import React from "react";
+import { Navigate, useParams } from "react-router-dom";
+import { loadStripe } from '@stripe/stripe-js';
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_USER, QUERY_ME, QUERY_ALL_PRODUCTS } from "../utils/queries";
+import { CHECKOUT } from "../utils/mutations"; 
+import Auth from "../utils/auth";
 import { LOGIN_USER } from "../utils/mutations";
 
-import Auth from "../utils/auth";
+const stripePromise = loadStripe('pk_live_51LrWT7JEY17vHLgfrUHSVQxCAsdjGxQnkyn9aLtJ1vGeVGMzRGEJMn128XuRykxqZAIf0ogzn0FEfpPNJ34YQReX00c4b7fT8f');
+
 
 const Subscription = (props) => {
+
+	const { loading:productsLoading, data:productsData} = useQuery(QUERY_ALL_PRODUCTS)
+
+	const [checkout, {errors}] = useMutation(CHECKOUT);
 	const [login, { error }] = useMutation(LOGIN_USER);
+  
+  
+	async function createCheckout () {
+	  console.log(productsData)
+	  const { data } = await checkout ({
+		variables: {products: productsData.products.map(product => {
+		  return product._id
+		})}
+	  })
+	  stripePromise.then((res) => {
+		res.redirectToCheckout({ sessionId: data.checkout.session });
+	  });
+  
+	}
+	const { username: userParam } = useParams();
+  
+	  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+		  variables: { username: userParam },
+		  variablesPhotos: { photocount: useParams },
+	  });
+  
+	  const user = data?.me || data?.user || {};
+  
+	  // navigate to personal profile page if username is yours
+	  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+		  return <Navigate to="/profile:username" />;
+	  }
+  
+	  if (loading) {
+		  return <div>Loading...</div>;
+	  }
+
+
+
+
+
+
+
+
+	
 
 	// submit form
 	const handleFormSubmit = async (event) => {
@@ -39,12 +89,12 @@ const Subscription = (props) => {
 								knowledge of our sales, and so much more! Thank you for being a
 								part of this community!
 							</p>
-							<button className="btn d-block w-100" type="submit">
-								Submit
+							<button className="btn d-block w-100" type="submit" onClick = {createCheckout}>
+								Subscribe
 							</button>
 						</form>
 
-						{error && <div>Login failed</div>}
+						{/* {error && <div>Login failed</div>} */}
 					</div>
 				</div>
 			</div>

@@ -26,8 +26,8 @@ export const ADD_USER = gql`
 
 
 export const ADD_CANDID = gql`
-  mutation addCandid($image: String!, $productName: String!, $retailer: String!) {
-    addCandid(image: $image) {
+  mutation addCandid($image: String!, $productName: String!, $retailer: String!, $username: String!) {
+    addCandid(image: $image, productName: $productName, retailer: $retailer, username: $username) {
       _id
       image
       productName
@@ -38,17 +38,30 @@ export const ADD_CANDID = gql`
 `;
 
 export const REMOVE_CANDID = gql`
-  mutation removeCandid($id: ID!) {
-    removeCandid(id: $id) {
-      _id
-      username
-      candids {
-        _id
-        image
-      }
+  mutation RemoveCandid($candidId: ID!) {
+    removeCandid(candidId: $candidId) {
+      ok
     }
   }
 `;
+
+
+export const UPDATE_CANDID = gql`
+mutation UpdateCandid($candidId: ID!, $newProductName: String!, $newRetailer: String!) {
+  updateCandid(candidId: $candidId, newProductName: $newProductName, newRetailer: $newRetailer) {
+    ok
+  }
+}
+`
+
+export const ADD_COUPON = gql `
+mutation addCoupon($couponText: String!, $redeemCounter: String!) {
+ addCoupon(couponText: $couponText, redeemCounter: $redeemCounter){
+  _id
+  couponText
+  redeemCounter
+ }
+}`
 
 export const UPLOAD_FILE = gql`
     mutation FileUpload($file: Upload!, $retailer: String!, $product: String!) {
@@ -60,3 +73,27 @@ export const UPLOAD_FILE = gql`
     }
 `;
 
+
+
+export const ADD_ORDER = gql`
+  mutation addOrder($products: [ID]!) {
+    addOrder(products: $products) {
+      purchaseDate
+      products {
+        _id
+        name
+        description
+        price
+        quantity
+
+      }
+    }
+  }
+`;
+
+export const CHECKOUT = gql`
+mutation checkout($products: [ID]!) {
+  checkout(products: $products) {
+    session
+  }
+}`

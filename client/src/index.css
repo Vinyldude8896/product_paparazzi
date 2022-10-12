@@ -1378,4 +1378,16 @@ nav a:hover {
 	margin: 10px;
 }
 
+.candid-remove-btn {
+	position: absolute;
+	cursor: pointer;
+	font-size: 2rem;
+	top: 5px;
+	right: 5px;
+	border: none;
+	background-color: palevioletred;
+	color: white;
+	border-radius: 50%;
+}
+
 
