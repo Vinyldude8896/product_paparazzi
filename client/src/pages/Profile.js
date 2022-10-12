@@ -1,32 +1,59 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
 
-import { useLazyQuery } from "@apollo/client";
-import { QUERY_CANDIDS } from "../utils/queries";
+import { QUERY_MY_CANDIDS } from "../utils/queries";
 import Auth from "../utils/auth";
-import { SERVER_URL } from "../utils/vars";
+
+import { PictureCard } from "../components/PictureCard";
+import { REMOVE_CANDID } from "../utils/mutations";
 
 const Profile = (props) => {
   const location = useLocation();
   const user =  Auth.getProfile().data;
+
+  const [removeCandid, {loading: removeLoading}] = useMutation(REMOVE_CANDID, {
+    refetchQueries: [
+      {
+        query: QUERY_MY_CANDIDS,
+        variables: { username:  user.username },
+        fetchPolicy: 'cache-and-network'
+      },
+    ],
+  });
+
   
-  const [getCandids, { loading: loadingCandids, data: candidsData, error }] = useLazyQuery(QUERY_CANDIDS, {
+  const { loading, data, error, refetch } = useQuery(QUERY_MY_CANDIDS, {
     variables: { username:  user.username },
     fetchPolicy: 'cache-and-network'
   });
 
   // refetch candids everytime coming to this page
   useEffect(() => {
-    getCandids();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
+  
+  const removeCandidHandler = async (id) => {
+    const { data } = await removeCandid({ variables: { candidId: id } });
+    if (data.ok) {
+      // refresh candids since deletion occured
+      // await refetch();
+    } else {
 
-  if (loadingCandids || !candidsData) {
+    }
+  }
+
+  if (loading || removeLoading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
     return <div>Error occured</div>;
+  }
+
+  if (data.myCandids.length === 0) {
+    return <h3>No Candids Yet</h3>;
   }
 
   return (
@@ -37,23 +64,18 @@ const Profile = (props) => {
         </h2>
       </div>
       <div className="pictureBox">
-        {candidsData.candids.map(({ image, productName, retailer, createdAt, _id }) => (
-          <div key={_id} className="card">
-            <p className="">
-              {/* <img
-                src={retailerLogo}
-                alt={retailer}
-                className="retailerLogo"
-              /> */}
-              {retailer}   ,
-              {productName}  ,
-              Date updated {createdAt} </p>
-            <img
-              src={`${SERVER_URL}/candid-photos/${image}`}
-              alt={retailer}
-              className="shelfImage"
-            />
-          </div>
+        {data.myCandids.map(({ image, productName, retailer, createdAt, _id, username }) => (
+          <PictureCard
+            key={_id}
+            candidId={_id}
+            image={image}
+            productName={productName}
+            retailer={retailer}
+            dateUploaded={createdAt}
+            owner={username}
+            showRemoveButton
+            remove={() => removeCandidHandler(_id)}
+          />
         ))}
       </div>
     </div>
