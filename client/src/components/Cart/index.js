@@ -1,8 +1,15 @@
+
+// importing react 
 import React, { useEffect } from "react";
+//importing the QUERY_CHECKOUT from queries
 import { QUERY_CHECKOUT } from "../../utils/queries";
+//importing the CartItem component
 import CartItem from "../CartItem";
+// importing loadstripe for our checkout with Stripe
 import { loadStripe } from "@stripe/stripe-js";
+//importing the useLazyQuery from the Apollo Client
 import { useLazyQuery } from "@apollo/client";
+// importing the idbPromise from helpers
 import { idbPromise } from "../../utils/helpers";
 import Auth from "../../utils/auth";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
