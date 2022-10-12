@@ -24,13 +24,14 @@ const Contact = (props) => {
 	return (
 		<main className="flex-row justify-center mb-4">
 			<div className="col-12 col-md-6">
-				<div className="card">
-					<div className="card-body">
+				<div className="card website">
+					<div className="card-body ">
 						<form onSubmit={handleFormSubmit}>
 							<h2>Get In Touch With Us</h2>
-							<h3>Abokichi</h3>
 							<p>
-								<a href="https://abokichi.ca/">Abokichi Website</a>
+								<u>
+									<a href="https://abokichi.ca/">Abokichi Website</a>
+								</u>
 							</p>
 						</form>
 

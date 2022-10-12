@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PaparazziLogo from "../../images/PaparazziLogo.png";
+import PaparazziLogo from "../../images/PrPalogo.png";
 
 import Auth from "../../utils/auth";
 
