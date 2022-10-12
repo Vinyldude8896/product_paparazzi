@@ -28,7 +28,7 @@ import Contact from "./pages/Contact";
 
 const httpLink = createHttpLink({
 	uri:
-		process.env.NODE_ENV === "development"
+		process.env.NODE_ENV === "production"
 			? "http://localhost:3001/graphql"
 			: "/graphql",
 });
@@ -53,7 +53,7 @@ const client = new ApolloClient({
       createUploadLink({
           headers: { "Apollo-Require-Preflight": "true" },
           uri:
-              process.env.NODE_ENV === "development"
+              process.env.NODE_ENV === "production"
                   ? "http://localhost:3001/graphql"
                   : "/graphql",
       })
