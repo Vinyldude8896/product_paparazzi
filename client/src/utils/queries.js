@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
   query user($username: String!) {
@@ -86,3 +86,23 @@ query candid($id: ID!) {
     username
   }
 }`
+export const QUERY_CHECKOUT = gql`
+	query getCheckout($products: [ID]!) {
+		checkout(products: $products) {
+			session
+		}
+	}
+`;
+
+
+export const QUERY_ALL_PRODUCTS = gql`
+  {
+    products {
+      _id
+      name
+      description
+      price
+      quantity
+    }
+  }
+`;

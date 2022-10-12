@@ -1,7 +1,9 @@
+const stripe = require("stripe")("sk_test_Hrs6SAopgFPF0bZXSN3f6ELN");
 const express = require("express");
 const graphqlUploadExpress = require("graphql-upload/graphqlUploadExpress.js");
 const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
+const Product = require("./models/Product");
 
 const { typeDefs, resolvers } = require("./schemas");
 const { authMiddleware } = require("./utils/auth");
@@ -31,7 +33,6 @@ if (process.env.NODE_ENV === "development") {
 	});
 }
 
-
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
 	await server.start();
@@ -40,6 +41,12 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 	db.once("open", () => {
 		if (!require("fs").existsSync("./Photos")) { require("fs").mkdirSync("Photos")}
+		(async () => {
+			const product = await Product.findOne({name: "Subscription"})
+			if (!product) {
+				await Product.create({name: "Subscription", description: "tier1", price: 3, quantity: 1})
+			}
+		})()
 		app.listen(PORT, () => {
 			console.log(`API server running on port ${PORT}!`);
 			console.log(
@@ -48,6 +55,8 @@ const startApolloServer = async (typeDefs, resolvers) => {
 		});
 	});
 };
+
+////////////////////
 
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);

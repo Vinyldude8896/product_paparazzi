@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+import { useQuery } from "@apollo/client";
+
 import Auth from "../utils/auth";
-import { useLazyQuery, useQuery } from "@apollo/client";
 import { QUERY_ALL_CANDIDS } from "../utils/queries";
 import CandidList from "../components/CandidList";
 import BackgroundImage from "../images/shopcartaisle.jpeg";
-import { useLocation } from "react-router-dom";
 
 const Home = () => {
-  // const { data: userData } = useQuery(QUERY_ME_BASIC);
   const location = useLocation();
 
   // will import out photos here
@@ -46,10 +46,12 @@ const Home = () => {
               title = "Current Candids"
             />
           </div>
-        )}
-        <div className="col-12 mb-3">
-          <div className="bg-text">
-            <h2>Help Your Favourite Brand and Be Rewarded</h2>
+				)}
+				<div className="col-12 mb-3 col-lg-8">
+          <div className="col-12 mb-3">
+            <div className="bg-text">
+              <h2>Help Your Favourite Brand and Be Rewarded</h2>
+            </div>
           </div>
         </div>
       </div>
