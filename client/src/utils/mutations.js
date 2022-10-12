@@ -38,14 +38,9 @@ export const ADD_CANDID = gql`
 `;
 
 export const REMOVE_CANDID = gql`
-  mutation removeCandid($id: ID!) {
-    removeCandid(id: $id) {
-      _id
-      username
-      candids {
-        _id
-        image
-      }
+  mutation RemoveCandid($candidId: ID!) {
+    removeCandid(candidId: $candidId) {
+      ok
     }
   }
 `;

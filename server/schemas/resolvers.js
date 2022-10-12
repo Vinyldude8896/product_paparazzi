@@ -35,11 +35,15 @@ const resolvers = {
       const retailers = await Retailer.find({});
       return retailers;
     },
-    candids: async (parent, { username }) => {
+    myCandids: async (parent, { username }) => {
       console.log(username);
-      const candids = await Candid.find({username: username});
-      return candids;
-    }
+      const myCandids = await Candid.find({username: username}); // filter candids by username
+      return myCandids;
+    },
+    allCandids: async (parent, {}) => {
+      const allCandids = await Candid.find({}); // find all candids
+      return allCandids;
+    },
   },
 
   Mutation: {
@@ -121,6 +125,13 @@ const resolvers = {
     addCandid: async (productName, image, retailerId, userId) => {
       const newCandid = await Candid.create({productName, image, retailerId, userId});
       return newCandid;
+    },
+    removeCandid: async (parent, { candidId }) => {
+      const deletedCandid = await Candid.findByIdAndDelete(candidId);
+      if (deletedCandid) {
+        return { ok: true };
+      }
+      return { ok: false };
     }
   }
 };

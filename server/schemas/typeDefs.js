@@ -34,13 +34,18 @@ const typeDefs = gql`
     username: String!
     createdAt: String!
   }
+
+  type DeleteResponse {
+    ok: Boolean!
+  }
   
   type Query {
     me: User
     users: [User]
     user(username: String!): User
     retailers: [Retailer]
-    candids(username: String!): [Candid]
+    myCandids(username: String!): [Candid]
+    allCandids: [Candid]
   }
   type Mutation {
     fileUpload(file: Upload!, retailer: String!, product: String!): File!
@@ -48,6 +53,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     addFriend(friendId: ID!): User
     addCandid(image: String!, productName: String!, retailer: String!, username: String!): Candid
+    removeCandid(candidId: ID!): DeleteResponse
   }
 `;
 
