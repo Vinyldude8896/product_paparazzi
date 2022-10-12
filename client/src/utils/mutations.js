@@ -26,8 +26,8 @@ export const ADD_USER = gql`
 
 
 export const ADD_CANDID = gql`
-  mutation addCandid($image: String!, $productName: String!, $retailer: String!) {
-    addCandid(image: $image) {
+  mutation addCandid($image: String!, $productName: String!, $retailer: String!, $username: String!) {
+    addCandid(image: $image, procutName: $productName, retailer: $retailer, username: $username) {
       _id
       image
       productName
@@ -38,14 +38,9 @@ export const ADD_CANDID = gql`
 `;
 
 export const REMOVE_CANDID = gql`
-  mutation removeCandid($id: ID!) {
-    removeCandid(id: $id) {
-      _id
-      username
-      candids {
-        _id
-        image
-      }
+  mutation RemoveCandid($candidId: ID!) {
+    removeCandid(candidId: $candidId) {
+      ok
     }
   }
 `;

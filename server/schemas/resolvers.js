@@ -37,11 +37,14 @@ const resolvers = {
 			const retailers = await Retailer.find({});
 			return retailers;
     },
-    candids: async (parent, { username }) => {
-      console.log(username);
-      const candids = await Candid.find({username: username});
-      return candids;
-		},
+    myCandids: async (parent, { username }) => {
+      const myCandids = await Candid.find({username: username}); // filter candids by username
+      return myCandids;
+    },
+    allCandids: async (parent, {}) => {
+      const allCandids = await Candid.find({}); // find all candids
+      return allCandids;
+    },
     products: async () => {
 			const products = await Product.find({});
 			return products;
@@ -121,17 +124,22 @@ const resolvers = {
 
 				return updatedUser;
 			}
-
-			throw new AuthenticationError("You need to be logged in!");
-		},
-		addCandid: async (productName, image, retailerId, userId) => {
+    },
+    addCandid: async (productName, image, retailer, username) => {
 			const newCandid = await Candid.create({
 				productName,
 				image,
-				retailerId,
-				userId,
+				retailer,
+				username,
 			});
 			return newCandid;
+		},
+    removeCandid: async (parent, { candidId }) => {
+      const deletedCandid = await Candid.findByIdAndDelete(candidId);
+      if (deletedCandid) {
+        return { ok: true };
+      }
+      return { ok: false };
 		},
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;

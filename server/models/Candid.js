@@ -22,14 +22,14 @@ const candidSchema = new Schema(
       maxlength: 55
     },
     createdAt: {
-        type: Date,
-        default: Date.now,
-        get: timestamp => dateFormat(timestamp)
-      },
+      type: Date,
+      default: Date.now,
+      get: timestamp => dateFormat(timestamp)
+    },
     username: {
-        type: String,
-        required: true
-      },
+      type: String,
+      required: true
+    },
   },
   {
     toJSON: {

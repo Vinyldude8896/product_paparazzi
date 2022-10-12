@@ -36,6 +36,10 @@ const typeDefs = gql`
     createdAt: String!
   }
 
+  type DeleteResponse {
+    ok: Boolean!
+  }
+  
   type Product {
     _id: ID
     name: String
@@ -62,9 +66,10 @@ const typeDefs = gql`
     product(_id: ID!): Product
     products: [Product]
     retailers: [Retailer]
+    myCandids(username: String!): [Candid]
+    allCandids: [Candid]
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    candids(username: String!): [Candid]
   }
 
   type Mutation {
@@ -73,11 +78,12 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     addOrder(products: [ID]!): Order
     addFriend(friendId: ID!): User
+    removeCandid(candidId: ID!): DeleteResponse
     addCandid(
       productName: String!
       image: String!
-      retailerId: ID!
-      userId: ID!
+      retailer: String!
+      username: String!
     ): Candid
     checkout(products: [ID]!): Checkout
   }

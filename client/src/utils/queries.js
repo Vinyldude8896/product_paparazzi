@@ -51,9 +51,9 @@ export const QUERY_ME_BASIC = gql`
   }
 `;
 
-export const QUERY_CANDIDS = gql `
-query candids($username: String!) {
-  candids(username: $username) {
+export const QUERY_MY_CANDIDS = gql`
+query GetMyCandids($username: String!) {
+  myCandids(username: $username) {
     _id
     image
     productName
@@ -63,9 +63,19 @@ query candids($username: String!) {
   }
 }`
 
+export const QUERY_ALL_CANDIDS = gql`
+query GetAllCandids {
+  allCandids {
+    _id
+    image
+    productName
+    retailer
+    createdAt
+    username
+  }
+}`
 
-
-export const QUERY_CANDID = gql `
+export const QUERY_CANDID = gql`
 query candid($id: ID!) {
   candid(_id: $id) {
     _id
