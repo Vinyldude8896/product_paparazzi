@@ -7,17 +7,19 @@ import Auth from "../utils/auth";
 import { SERVER_URL } from "../utils/vars";
 
 const Profile = (props) => {
-  const locationKey = useLocation().key;
+  const location = useLocation();
   const user =  Auth.getProfile().data;
   
   const [getCandids, { loading: loadingCandids, data: candidsData, error }] = useLazyQuery(QUERY_CANDIDS, {
     variables: { username:  user.username },
+    fetchPolicy: 'cache-and-network'
   });
 
+  // refetch candids everytime coming to this page
   useEffect(() => {
-    //console.log('locaitonKey', locationKey);
     getCandids();
-  }, [locationKey, getCandids]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   if (loadingCandids || !candidsData) {
     return <div>Loading...</div>;
