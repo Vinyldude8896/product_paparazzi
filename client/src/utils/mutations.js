@@ -45,6 +45,15 @@ export const REMOVE_CANDID = gql`
   }
 `;
 
+
+export const UPDATE_CANDID = gql`
+mutation UpdateCandid($candidId: ID!, $newProductName: String!, $newRetailer: String!) {
+  updateCandid(candidId: $candidId, newProductName: $newProductName, newRetailer: $newRetailer) {
+    ok
+  }
+}
+`
+
 export const UPLOAD_FILE = gql`
     mutation FileUpload($file: Upload!, $retailer: String!, $product: String!) {
         fileUpload(file: $file, retailer: $retailer, product: $product) {

@@ -20,6 +20,7 @@ import Signup from './pages/Signup';
 import Incentives from "./pages/Incentives";
 import UploadCandid from './pages/UploadCandid';
 import ProtectedRoute from "./components/ProtectedRoute";
+import EditCandid from "./pages/EditCandid";
 
 
 // const httpLink = createHttpLink({
@@ -98,6 +99,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <UploadCandid />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/candid/:candidId" 
+                element={
+                  <ProtectedRoute>
+                    <EditCandid />
                   </ProtectedRoute>
                 } 
               />

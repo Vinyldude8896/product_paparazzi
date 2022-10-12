@@ -35,6 +35,10 @@ const resolvers = {
       const retailers = await Retailer.find({});
       return retailers;
     },
+    candid: async (parent, { _id }) => {
+      const candid = await Candid.findById(_id);
+      return candid;
+    },
     myCandids: async (parent, { username }) => {
       console.log(username);
       const myCandids = await Candid.find({username: username}); // filter candids by username
@@ -129,6 +133,13 @@ const resolvers = {
     removeCandid: async (parent, { candidId }) => {
       const deletedCandid = await Candid.findByIdAndDelete(candidId);
       if (deletedCandid) {
+        return { ok: true };
+      }
+      return { ok: false };
+    },
+    updateCandid: async (parent, {candidId, newProductName, newRetailer}) => {
+      const updatedCandid = await Candid.findByIdAndUpdate(candidId, {productName: newProductName, retailer: newRetailer});
+      if (updatedCandid) {
         return { ok: true };
       }
       return { ok: false };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { SERVER_URL } from "../../utils/vars";
 
 export const PictureCard = ({ image, productName, retailer, dateUploaded, candidId, owner, remove, showRemoveButton }) => {
@@ -15,6 +16,7 @@ export const PictureCard = ({ image, productName, retailer, dateUploaded, candid
           {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
           {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
         </div>
+        <Link to={`/candid/${candidId}`}>Edit</Link>
       </div>
     </div>
   );

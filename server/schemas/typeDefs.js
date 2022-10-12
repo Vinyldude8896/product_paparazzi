@@ -39,14 +39,20 @@ const typeDefs = gql`
     ok: Boolean!
   }
   
+  type UpdateResponse {
+    ok: Boolean!
+  }
+  
   type Query {
     me: User
     users: [User]
     user(username: String!): User
     retailers: [Retailer]
+    candid(_id: ID!): Candid
     myCandids(username: String!): [Candid]
     allCandids: [Candid]
   }
+
   type Mutation {
     fileUpload(file: Upload!, retailer: String!, product: String!): File!
     login(email: String!, password: String!): Auth
@@ -54,6 +60,7 @@ const typeDefs = gql`
     addFriend(friendId: ID!): User
     addCandid(image: String!, productName: String!, retailer: String!, username: String!): Candid
     removeCandid(candidId: ID!): DeleteResponse
+    updateCandid(candidId: ID!, newProductName: String!, newRetailer: String!): UpdateResponse
   }
 `;
 
