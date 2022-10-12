@@ -1,102 +1,81 @@
-import React from "react";
-import { Navigate, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
 
-import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USER, QUERY_ME } from "../utils/queries";
+import { QUERY_MY_CANDIDS } from "../utils/queries";
 import Auth from "../utils/auth";
 
-import Kombucha1 from "../images/Kombucha1.png";
-import Kombucha2 from "../images/Kombucha2.png";
-import Kombucha3 from "../images/Kombucha3.png";
-import Kombucha4 from "../images/Kombucha4.png";
-import Kombucha5 from "../images/Kombucha5.png";
-import Kombucha6 from "../images/Kombucha6.png";
+import { PictureCard } from "../components/PictureCard";
+import { REMOVE_CANDID } from "../utils/mutations";
 
 const Profile = (props) => {
-  const { username: userParam } = useParams();
+  const location = useLocation();
+  const user =  Auth.getProfile().data;
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
+  const [removeCandid, {loading: removeLoading}] = useMutation(REMOVE_CANDID, {
+    refetchQueries: [
+      {
+        query: QUERY_MY_CANDIDS,
+        variables: { username:  user.username },
+        fetchPolicy: 'cache-and-network'
+      },
+    ],
   });
 
-  const user = data?.me || data?.user || {};
+  
+  const { loading, data, error, refetch } = useQuery(QUERY_MY_CANDIDS, {
+    variables: { username:  user.username },
+    fetchPolicy: 'cache-and-network'
+  });
 
-  // navigate to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/profile:username" />;
+  // refetch candids everytime coming to this page
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+  
+  const removeCandidHandler = async (id) => {
+    const { data } = await removeCandid({ variables: { candidId: id } });
+    if (data.ok) {
+      // refresh candids since deletion occured
+      // await refetch();
+    } else {
+
+    }
   }
 
-  if (loading) {
+  if (loading || removeLoading) {
     return <div>Loading...</div>;
   }
 
-  const portfolios = [
-    {
-      image: Kombucha1,
-      productName: 'Kombucha1',
-      retailer: 'Loblaws'
-    },
-    {
-      image: Kombucha2,
-      productName: 'Kombucha2',
-      retailer: 'Metro'
-    },
-    {
-      image: Kombucha3,
-      productName: 'Kombucha3',
-      retailer: 'Sobeys'
-    },
-    {
-      image: Kombucha4,
-      productName: 'Kombucha4',
-      retailer: 'Fortinos'
-    },
-    {
-      image: Kombucha5,
-      productName: 'Kombucha5',
-      retailer: 'Fortinos'
-    },
-    {
-      image: Kombucha6,
-      productName: 'Kombucha6',
-      retailer: 'Fortinos'
-    },
-  ];
+  if (error) {
+    return <div>Error occured</div>;
+  }
 
-  // if (!user?.username) {
-  //   return (
-  //     <h4>
-  //       You need to be logged in to see this. Use the navigation links above to
-  //       sign up or log in!
-  //     </h4>
-  //   );
-  // }
+  if (data.myCandids.length === 0) {
+    return <h3>No Candids Yet</h3>;
+  }
 
   return (
     <div>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
-          Viewing {userParam ? `${user.username}'s` : "your"} profile.
+          Viewing {`${user.username}'s`} profile.
         </h2>
       </div>
-      <div className="col-md-4 services">
-        {portfolios.map(({ image, productName, retailer }) => (
-          <div key={image} className="">
-            <img
-              src={image}
-              alt={retailer}
-              className=""
-            />
-            <p className="mt-4 text-center">{retailer}</p>
-            <div className="flex items-center justify-center">
-              <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
-                <a href={retailer} target="_blank" rel="noreferrer">Demo</a>
-              </button>
-              <button className="w-1/2 px-6 py-3 m-4 duration-200 hover:scale-105">
-                <a href={productName} target="_blank" rel="noreferrer">Repo</a>
-              </button>
-            </div>
-          </div>
+      <div className="pictureBox">
+        {data.myCandids.map(({ image, productName, retailer, createdAt, _id, username }) => (
+          <PictureCard
+            key={_id}
+            candidId={_id}
+            image={image}
+            productName={productName}
+            retailer={retailer}
+            dateUploaded={createdAt}
+            owner={username}
+            showRemoveButton
+            remove={() => removeCandidHandler(_id)}
+          />
         ))}
       </div>
     </div>

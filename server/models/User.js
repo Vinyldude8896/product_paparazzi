@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const Order = require('./Order');
+
 
 const userSchema = new Schema(
   {
@@ -20,16 +22,17 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    photos: [
+    candids: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Photo'
+        ref: 'Candid'
       }
     ],
-    friends: [
+    orders: [Order.schema],
+    coupons: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Coupon'
       }
     ]
   },
@@ -55,8 +58,8 @@ userSchema.methods.isCorrectPassword = async function(password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('friendCount').get(function() {
-  return this.friends.length;
+userSchema.virtual('candidCount').get(function() {
+  return this.candids.length;
 });
 
 const User = model('User', userSchema);
