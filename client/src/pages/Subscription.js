@@ -8,7 +8,7 @@ import Auth from "../utils/auth";
 import { LOGIN_USER } from "../utils/mutations";
 
 const stripePromise = loadStripe(
-	"pk_live_51LrWT7JEY17vHLgfrUHSVQxCAsdjGxQnkyn9aLtJ1vGeVGMzRGEJMn128XuRykxqZAIf0ogzn0FEfpPNJ34YQReX00c4b7fT8f"
+	"pk_live_51LrWT7JEY17vHLgfhDTmuSXxuUwPmv2OypvegRRGVbzBznGWWod8tLdtsBJ83VVnAzO1aJD4ppwkkhsHYzgcKLas00fcPHnZbe"
 );
 
 const Subscription = (props) => {
