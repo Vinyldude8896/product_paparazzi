@@ -25,12 +25,6 @@ import Subscription from "./pages/Subscription";
 import HowItWorks from "./pages/HowItWorks";
 import Contact from "./pages/Contact";
 
-const httpLink = createHttpLink({
-	uri:
-		process.env.NODE_ENV === "production"
-			? "http://localhost:3001/graphql"
-			: "/graphql",
-});
 
 const authLink = setContext((_, { headers }) => {
 	const token = localStorage.getItem("id_token");
