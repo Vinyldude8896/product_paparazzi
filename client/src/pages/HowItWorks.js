@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
+import workBackgroundImage from "../images/phoneCart.jpeg";
 
 import Auth from "../utils/auth";
 
@@ -22,27 +23,37 @@ const HowItWorks = (props) => {
 		}
 	};
 
-	return (
-		<main className="flex-row justify-center mb-4">
-			<div className="col-12 col-md-6">
-				<div className="card">
-					<div className="card-body">
-						<form onSubmit={handleFormSubmit}>
-							<h3>How Does It Work?</h3>
-							<p>
-								What is involved in being a Product Paparazzi? It is quite
-								simple, and with a great perk! Shop at your usual locations, and
-								while you are there, snap a photo of our products on the
-								shelves. Upload the photos to your Candid page, and after you
-								have uploaded a certain amount of photos, you get a reward as a
-								thank you! Rewards can be found under the "Incentives" page.
-								Subscribe to our website for as little as $3 month to begin, and
-								to receive more perks!
-							</p>
-						</form>
+	const loggedIn = Auth.loggedIn();
 
-						{error && <div>Login failed</div>}
-					</div>
+	return (
+		<main>
+			{!loggedIn && (
+				<img
+					className="worksBackgroundImage"
+					src={workBackgroundImage}
+					alt="pic being taken of mug"
+				/>
+			)}
+
+			<div className="card howBody">
+				<div className="card-body ">
+					<h3 className="howTitle">
+						<b>How Does It Work?</b>
+					</h3>
+					<p className="howParagraph">
+						What is involved in being a Product Paparazzi? <br></br>
+						<br></br>It is quite simple, and with a great perk! Shop at your
+						usual locations, and while you are there, snap a photo of our
+						products on the shelves.<br></br>
+						<br></br>Upload the photos to your Candid page, and after you have
+						uploaded a certain amount of photos, you get a reward as a thank
+						you!<br></br>
+						<br></br>Rewards can be found under the "Incentives" page. <br></br>
+						<br></br>Subscribe to our website for as little as $3 month to
+						begin, and to receive more perks!
+					</p>
+
+					{error && <div>Login failed</div>}
 				</div>
 			</div>
 		</main>
