@@ -76,3 +76,8 @@ To test this app:<br />
     I can be contacted by phone as well, but prefer email contact first.
 ### Images
 
+<img src="./client/src/images/product_paparazzi_4.jpg" alt="Getting started">
+<img src="./client/src/images/Product_paparazzi_1.jpeg" alt="Getting started">
+<img src="./client/src/images/produect_paparrazi_2.jpg" alt="Getting started">
+<img src="./client/src/images/product_paparazzi_3.jpg" alt="Getting started">
+
