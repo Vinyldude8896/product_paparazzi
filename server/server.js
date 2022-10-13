@@ -25,7 +25,7 @@ app.use(express.json());
 
 app.use('/candid-photos', express.static(path.resolve(__dirname, './Photos')));
 app.get('/',(req, res) => {
-	res.sendFile(path.join(__dirname, '../client/public/index.html'));
+	res.sendFile(path.join(__dirname, '../client/build/index.html'));
 }) 
 
 // Serve up static assets
