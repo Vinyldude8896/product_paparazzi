@@ -18,7 +18,8 @@ const CandidList = ({ candids, title }) => {
   // setting the showRemovebutton to false
   return (
     <div>
-      <h1 className="text-center text-4xl font-bold text-dark">{title}</h1>
+    <h1 className="text-center text-4xl font-bold text-dark">{title}</h1>
+    <div className="pictureBox">
       {candids.map(
         ({ image, productName, retailer, createdAt, _id, username }) => (
           <PictureCard
@@ -33,6 +34,7 @@ const CandidList = ({ candids, title }) => {
           />
         )
       )}
+    </div>
     </div>
   );
 };

@@ -75,7 +75,7 @@ const EditCandidForm = ({ id, image, productName, retailer }) => {
   }
 
   return (
-    <div className="col-12 col-md-6">
+    <div className="w-full text-center pr-5 md:p-2 z-10 mt-5 col-md-6">
       <div className="card">
         <h4 className="card-header">Edit Your Candid</h4>
         <div className="card-body">
@@ -100,8 +100,8 @@ const EditCandidForm = ({ id, image, productName, retailer }) => {
                 onChange={fileView}
                 accept="image/png, image/jpg, image/jpeg"
               /> */}
-              <img style={{display: 'block'}} src={`${SERVER_URL}/candid-photos/${image}`} alt={image} />
-              <label>Product Name</label>
+              <img className="card-image-edit card-img-top" style={{display: 'block'}} src={`${SERVER_URL}/candid-photos/${image}`} alt={image} />
+              <label className="card-title">Product Name</label>
               <input
                 className="form-input"
                 placeholder="Product"
@@ -111,7 +111,7 @@ const EditCandidForm = ({ id, image, productName, retailer }) => {
                 onChange={(e) => setProductName(e.target.value)}
                 value={currentProductName}
               />
-              <label>Choose a Retailer Below</label>
+              <label className="card-title">Choose a Retailer Below</label>
               <select className="form-input" value={currentRetailer} id="retailer" name="retailer"  onChange={(e) => setRetailer(e.target.value)}>
                 <option value="Loblaws">Loblaws</option>
                 <option value="Sobeys">Sobeys</option>
