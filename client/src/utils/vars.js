@@ -1,1 +1,1 @@
-export const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001';
+export const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001' || "https://productpaparazzi.herokuapp.com/";
